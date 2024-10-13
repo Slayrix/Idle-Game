@@ -16,12 +16,12 @@ Loading test from test.apk
 
 
 # screen pixels (real, hardware)
-WIDTH=1000  # 1280
-HEIGHT=1000  # 720
+WIDTH=1024  # 1280
+HEIGHT=600  # 720
 
 # reference/idealized screen pixels
-REFX = 1000
-REFY = 1000
+REFX = 1980
+REFY = 1080
 
 def u(real, ref, v):
     if abs(v)<0.9999999:
@@ -237,7 +237,7 @@ config = {
     _sdl2 : "canvas",
     user_canvas : 0,
     user_canvas_managed : 0,
-    ume_block : 1,
+    ume_block : 0,
     can_close : 0,
     archive : "test",
     gui_debug : 3,
