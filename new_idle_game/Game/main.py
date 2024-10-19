@@ -96,6 +96,18 @@ class button():
     def updateText(self, text: str, line: int):
         self.lineVarList[line] = self.font.render(text, True, self.textColor)
 
+class menu():
+    def __init__(self):
+        self.currentMenu = "defaultMenu"
+    
+    def setCurrentMenuToDefaultMenu(self):
+        self.currentMenu = "defaultMenu"
+
+    def setCurrentMenuToShop(self):
+        self.currentMenu = "shop"
+
+menuVar = menu()
+
 energy = currency()
 matter = currency()
 
@@ -109,15 +121,39 @@ energyText = text()
 matterText = text()
 
 genButton = button(["Click to gen"], (255, 255, 255), 150, 100)
+
+shopButton = button(["Shop"], (255, 255, 255), 150, 150)
+shopBackButton = button(["Back"], (255, 255, 255), 100, 100)
+
 bigBangButton = button(["Start Big Bang", str(bigBangUpgrade.cost) + " Energy"], (255, 255, 255), 150, 150)
 genEnergyUpgradeButton = button(["Upgrade 1", "Auto gen +" + str(genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(genEnergyUpgrade.cost) + " Matter"], (255, 255, 255), 150, 230)
 matterGenUpgradeButton = button(["Double Matter Generation", "Increases energy consumption by +10", str(matterGenUpgrade.cost) + " Matter"], (255, 255, 255), 150, 350)
 genEnergyUpgradeBuffButton = button(["Double Energy Generation of Upgrade 1", str(genEnergyUpgradeBuff.cost) + " Matter"], (255, 255, 255), 150, 470)
-#decreaseCostToGenMatterUpgradeButton = button("")
 
 def genEnergy():
     energy.addOne()
     updateScreen()
+
+def displayMenu ():
+    if menuVar.currentMenu == "defaultMenu":
+        screen.blit(energyText.text, (0,0))
+
+        genButton.drawButton((92, 92, 92))
+    
+        if bigBangUpgrade.level == 0 and energy.amount >= bigBangUpgrade.cost:
+            bigBangButton.drawButton((92, 92, 92))
+        elif bigBangUpgrade.level >= 1:
+            screen.blit(matterText.text, (0,50))
+            shopButton.drawButton((92, 92, 92))
+    elif menuVar.currentMenu == "shop":
+        screen.blit(energyText.text, (0,0))
+        screen.blit(matterText.text, (0,50))
+
+        shopBackButton.drawButton((92, 92, 92))
+
+        genEnergyUpgradeButton.drawButton((92, 92, 92))
+        matterGenUpgradeButton.drawButton((92, 92, 92))
+        genEnergyUpgradeBuffButton.drawButton((92, 92, 92))
 
 def updateScreen():
     screen.fill((0, 0, 0))
@@ -125,22 +161,11 @@ def updateScreen():
     energyText.setText("Energy: " + str(energy.amount), (255, 255, 255))
     matterText.setText("Matter: "+ str(matter.amount), (255, 255, 255))
 
-    genButton.drawButton((92, 92, 92))
-    
     genEnergyUpgradeButton.updateText("Auto gen +" + str(genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", 1)
     genEnergyUpgradeButton.updateText(str(genEnergyUpgrade.cost) + " Matter", 2)
-    genEnergyUpgradeButton.drawButton((92, 92, 92))
-
     matterGenUpgradeButton.updateText(str(matterGenUpgrade.cost) + " Matter", 2)
-    matterGenUpgradeButton.drawButton((92, 92, 92))
 
-    genEnergyUpgradeBuffButton.drawButton((92, 92, 92))
-
-    if bigBangUpgrade.level == 0:
-        bigBangButton.drawButton((92, 92, 92))
-    
-    screen.blit(energyText.text, (0,0))
-    screen.blit(matterText.text, (0,50))
+    displayMenu()
 
     pg.display.update()
 
@@ -207,6 +232,12 @@ async def main():
 
                 if genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
                     buyUpgradeBuff(genEnergyUpgradeBuff)
+                
+                if shopButton.rect.collidepoint(event.pos):
+                    menuVar.setCurrentMenuToShop()
+                
+                if shopBackButton.rect.collidepoint(event.pos):
+                    menuVar.setCurrentMenuToDefaultMenu()
             
         updateScreen()
         tick = gameTick(tick)
