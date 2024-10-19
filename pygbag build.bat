@@ -1,1 +1,1 @@
-python -m pygbag --ume_block 0 pygbag_build
+python -m pygbag --ume_block 0 web_build

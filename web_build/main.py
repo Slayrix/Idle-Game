@@ -218,26 +218,27 @@ async def main():
                 running = False
             
             if event.type == pg.MOUSEBUTTONDOWN:
-                if genButton.rect.collidepoint(event.pos):
-                    genEnergy()
+                if menuVar.currentMenu == "defaultMenu":
+                    if genButton.rect.collidepoint(event.pos):
+                        genEnergy()
                 
-                if bigBangButton.rect.collidepoint(event.pos):
-                    buyUpgrade(bigBangUpgrade)
+                    if bigBangButton.rect.collidepoint(event.pos) and bigBangUpgrade.level <= 0:
+                        buyUpgrade(bigBangUpgrade)
+                    
+                    if shopButton.rect.collidepoint(event.pos):
+                        menuVar.setCurrentMenuToShop()
+                if menuVar.currentMenu == "shop":
+                    if genEnergyUpgradeButton.rect.collidepoint(event.pos):
+                        buyUpgrade(genEnergyUpgrade)
                 
-                if genEnergyUpgradeButton.rect.collidepoint(event.pos):
-                    buyUpgrade(genEnergyUpgrade)
-                
-                if matterGenUpgradeButton.rect.collidepoint(event.pos):
-                    buyUpgrade(matterGenUpgrade)
+                    if matterGenUpgradeButton.rect.collidepoint(event.pos):
+                        buyUpgrade(matterGenUpgrade)
 
-                if genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
-                    buyUpgradeBuff(genEnergyUpgradeBuff)
+                    if genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
+                        buyUpgradeBuff(genEnergyUpgradeBuff)
                 
-                if shopButton.rect.collidepoint(event.pos):
-                    menuVar.setCurrentMenuToShop()
-                
-                if shopBackButton.rect.collidepoint(event.pos):
-                    menuVar.setCurrentMenuToDefaultMenu()
+                    if shopBackButton.rect.collidepoint(event.pos):
+                        menuVar.setCurrentMenuToDefaultMenu()
             
         updateScreen()
         tick = gameTick(tick)
