@@ -1,0 +1,2 @@
+8/14/24
+Changed progression so that shop is hidden at start and made big bang upgrade button show up in main menu instead of shop

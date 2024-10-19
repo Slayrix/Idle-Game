@@ -1,0 +1,6 @@
+7/10/24 v0.0.1
+Builds off concept 2
+
+Changed clicks to energy
+Added ability to start big bang 
+Added matter generation costs 10 energy to produce .01 matter

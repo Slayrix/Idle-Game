@@ -1,0 +1,6 @@
+7/10/24
+
+Added upgrade that costs matter and auto gens energy
+	Upgrade increases in cost as you buy more of it
+
+Added text box for displaying energy gain per second

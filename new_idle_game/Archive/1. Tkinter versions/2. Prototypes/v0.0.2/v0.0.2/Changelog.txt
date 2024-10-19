@@ -1,0 +1,17 @@
+7/11/24
+
+Restructured code
+	Made upgrades more modular
+	Reworked how buttons and text display
+
+Added cheat menu
+	Can be enabled by deleting # in marked line of code
+
+Made double matter gen upgrade cost exponentially grow and maxed out upgrade at level 3
+
+Made new upgrade that doulbes energy production of upgrade 1
+
+Made new upgrade that decreases the amount of energy needed to generate matter by 1
+
+8/13/24
+Added shop menu
