@@ -1,8 +1,0 @@
-Created: 10/12/24
-Archived: 10/12/24
-
-Changed currency to energy
-Added big bang button
-Added matter and matter generation
-Added text to display the amount of matter
-Added new energy gen upgrade button (no functionality)

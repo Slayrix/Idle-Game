@@ -1,0 +1,2 @@
+7/10/24
+Building off the previous concept by adding basic graphics instead of using the terminal and seeing how classes interact with tkinter
