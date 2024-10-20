@@ -5,8 +5,12 @@ screen = pg.display.set_mode((1000, 1000))
 
 class textBox:
     def __init__(self, xPos, yPos):
+        self.textString = ""
+        self.xPos = xPos
+        self.yPos = yPos
+        self.selected = False
         self.font = pg.font.Font("arial.ttf", 20)
-        self.text = self.font.render("", True, (0, 0, 0))
+        self.text = self.font.render(self.textString, True, (0, 0, 0))
 
         self.textBoxRect = self.text.get_rect()
         self.textBoxRect.height = self.text.get_height()
@@ -21,24 +25,41 @@ class textBox:
         self.boarderRect.y = yPos - 5
     
     def drawTextBox(self):
-        pg.draw.rect(screen, (92, 92, 92), self.boarderRect)
+        if self.selected == True:
+            pg.draw.rect(screen, (200, 200, 200), self.boarderRect)
+        else:
+            pg.draw.rect(screen, (92, 92, 92), self.boarderRect)
         pg.draw.rect(screen, (255, 255, 255), self.textBoxRect)
+        screen.blit(self.text, (self.xPos, self.yPos))
     
-    def isSelected(self):
-        pass
-test = textBox(100, 100)
-test.drawTextBox()
-
-pg.display.update()
-
+    def setSelected(self, bool):
+        self.selected = bool
+    
+    def addTextToTextBox(self, c):
+        if self.text.get_width() < self.textBoxRect.width - 10:
+            self.textString += c
+            self.text = self.font.render(self.textString, True, (0, 0, 0))
+    
+    def delTextFromTextBox(self):
+        if len(self.textString) > 0:
+            self.textString = self.textString[0:len(self.textString) - 1]
+            self.text = self.font.render(self.textString, True, (0, 0, 0))
+            
 def checkIfKeyPressed(event):
     shiftPressed = checkIfShiftPressed()
     if event.type == pg.KEYDOWN and event.key >= 97 and event.key <= 122:
-            if shiftPressed == True:
-                subAmount = 32
-            else:
-                subAmount = 0
-            print(chr(event.key - subAmount))
+        if shiftPressed == True:
+            subAmount = 32
+        else:
+            subAmount = 0
+        if test.selected == True:
+            test.addTextToTextBox(chr(event.key - subAmount))
+    elif event.type == pg.KEYDOWN and event.key >= 48 and event.key <= 57:
+        if test.selected == True:
+            test.addTextToTextBox(chr(event.key))
+    if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
+        if test.selected == True:
+            test.delTextFromTextBox()
 
 def eventCheck(running):
     for event in pg.event.get():
@@ -47,7 +68,10 @@ def eventCheck(running):
         
         if event.type == pg.MOUSEBUTTONDOWN:
             if test.textBoxRect.collidepoint(event.pos):
-                test.isSelected()
+                test.setSelected(True)
+
+            if not test.textBoxRect.collidepoint(event.pos):
+                test.setSelected(False)
         checkIfKeyPressed(event)   
     return running
     
@@ -59,9 +83,13 @@ def checkIfShiftPressed():
         shiftPressed = False
     return shiftPressed
 
+test = textBox(100, 100)
+
 def main():
     running = True
     while running:
+        test.drawTextBox()
+        pg.display.update()
         running = eventCheck(running)
             
 main()
