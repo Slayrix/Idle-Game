@@ -1,5 +1,5 @@
 import pygame as pg
-import time, asyncio, menuModule
+import time, asyncio
 
 pg.init()
 screen = pg.display.set_mode((1000, 1000))
@@ -96,7 +96,17 @@ class button:
     def updateText(self, text: str, line: int):
         self.lineVarList[line] = self.font.render(text, True, self.textColor)
 
-menuVar = menuModule.menu()
+class menu:
+    def __init__(self):
+        self.currentMenu = "defaultMenu"
+    
+    def setCurrentMenuToDefaultMenu(self):
+        self.currentMenu = "defaultMenu"
+
+    def setCurrentMenuToShop(self):
+        self.currentMenu = "shop"
+
+menuVar = menu()
 
 energy = currency()
 matter = currency()
@@ -124,7 +134,7 @@ def genEnergy():
     energy.addOne()
     updateScreen()
 
-def displayMenu():
+def displayMenu ():
     if menuVar.currentMenu == "defaultMenu":
         screen.blit(energyText.text, (0,0))
 
@@ -199,50 +209,37 @@ def gameTick(tick):
         tick = 0
     return tick
 
-def eventCheck(running):
-    for event in pg.event.get():
-        running = checkIfQuit(event, running)
-        mouseClickCheck(event)    
-    return running
-
-def checkIfQuit(event, running):
-    if event.type == pg.QUIT:
-        running = False
-    return running
-
-def mouseClickCheck(event):
-    if event.type == pg.MOUSEBUTTONDOWN:
-        checkIfButtonClicked(event)
-        
-def checkIfButtonClicked(event):
-    if menuVar.currentMenu == "defaultMenu":
-        if shopButton.rect.collidepoint(event.pos) and bigBangUpgrade.level >= 1:
-            menuVar.setCurrentMenuToShop()
-
-        if genButton.rect.collidepoint(event.pos):
-            genEnergy()
-    
-        if bigBangButton.rect.collidepoint(event.pos) and bigBangUpgrade.level <= 0:
-            buyUpgrade(bigBangUpgrade)
-
-    if menuVar.currentMenu == "shop":
-        if genEnergyUpgradeButton.rect.collidepoint(event.pos):
-            buyUpgrade(genEnergyUpgrade)
-    
-        if matterGenUpgradeButton.rect.collidepoint(event.pos):
-            buyUpgrade(matterGenUpgrade)
-
-        if genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
-            buyUpgradeBuff(genEnergyUpgradeBuff)
-    
-        if shopBackButton.rect.collidepoint(event.pos):
-            menuVar.setCurrentMenuToDefaultMenu()
-  
 async def main():
-    tick = 0
     running = True
+    tick = 0
     while running:
-        running = eventCheck(running)
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                running = False
+            
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if menuVar.currentMenu == "defaultMenu":
+                    if genButton.rect.collidepoint(event.pos):
+                        genEnergy()
+                
+                    if bigBangButton.rect.collidepoint(event.pos) and bigBangUpgrade.level <= 0:
+                        buyUpgrade(bigBangUpgrade)
+                    
+                    if shopButton.rect.collidepoint(event.pos):
+                        menuVar.setCurrentMenuToShop()
+                if menuVar.currentMenu == "shop":
+                    if genEnergyUpgradeButton.rect.collidepoint(event.pos):
+                        buyUpgrade(genEnergyUpgrade)
+                
+                    if matterGenUpgradeButton.rect.collidepoint(event.pos):
+                        buyUpgrade(matterGenUpgrade)
+
+                    if genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
+                        buyUpgradeBuff(genEnergyUpgradeBuff)
+                
+                    if shopBackButton.rect.collidepoint(event.pos):
+                        menuVar.setCurrentMenuToDefaultMenu()
+            
         updateScreen()
         tick = gameTick(tick)
         time.sleep(.01)

@@ -1,8 +1,5 @@
-Created: 10/13/24
+Created: 10/20/24
 Archived: 
 
-Made entirely new button rendering to render better buttons
-Changed game folder layout and how fonts are loaded
-Added double matter generation upgrade
-Added double energy generation of upgrade 1 button
-Added shop menu
+Restructured code to be more modular
+Fixed bug that allowed to enter shop early
