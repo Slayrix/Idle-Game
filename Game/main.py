@@ -25,7 +25,7 @@ class currency:
     def addCostToGen(self, x):
         self.costToGen += x
 
-class upgrade():
+class upgrade:
     def __init__(self, cost, currencyCost, growthRate = 0, increaseGenPerSecondCurrency = None, increaseGenPerSecondAmount = None, increaseCostPerGenCurrency = None, increaseCostPerGenAmount = None):
         self.cost = cost
         self.currencyCost = currencyCost
@@ -39,7 +39,7 @@ class upgrade():
     def increaseCost(self):
         self.cost = round(self.cost*(1+self.growthRate)**self.level, 2)
 
-class upgradeBuff():
+class upgradeBuff:
     def __init__(self, cost, currencyCost, upgradeBuffed, upgradeVarBuffed, buffedAmount, growthRate = 0):
         self.cost = cost
         self.currencyCost = currencyCost
@@ -59,7 +59,7 @@ class text:
     def setText(self, text: str, textColor, backgroundColor = None):
         self.text = self.font.render(text, True, textColor, backgroundColor)
 
-class button():
+class button:
     def __init__(self, textList: list, textColor, xPos: int, yPos: int):
         self.font = pg.font.Font("arial.ttf", 30)
         self.lineVarList = []
@@ -96,7 +96,7 @@ class button():
     def updateText(self, text: str, line: int):
         self.lineVarList[line] = self.font.render(text, True, self.textColor)
 
-class menu():
+class menu:
     def __init__(self):
         self.currentMenu = "defaultMenu"
     
