@@ -1,5 +1,5 @@
 import pygame as pg
-import game, upgrade
+import game, upgrade, var
 
 class button:
     def __init__(self, textList: list, textColor, xPos: int, yPos: int):
@@ -38,7 +38,19 @@ class button:
     def updateText(self, text: str, line: int):
         self.lineVarList[line] = self.font.render(text, True, self.textColor)
 
-genButton = button(["Click to gen"], (255, 255, 255), 150, 100)
+def createButtons(buttonVarList):
+    print(buttonVarList)
+    for buttonList in buttonVarList:
+        buttonVar = buttonList[0]
+        buttonVar = var.declareClass(buttonVar, button, buttonList[1])
+
+genButton = button([""], (0, 0, 0), 0, 0)
+
+buttonVarList = [[genButton, [["Click to gen"], (255, 255, 255), 150, 100]]]
+
+createButtons(buttonVarList)
+
+#genButton = var.declareClass(genButton, button, [["Click to gen"], (255, 255, 255), 150, 100])
 
 shopButton = button(["Shop"], (255, 255, 255), 150, 150)
 shopBackButton = button(["Back"], (255, 255, 255), 100, 100)
