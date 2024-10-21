@@ -53,6 +53,7 @@ genEnergyUpgradeButton = button()
 matterGenUpgradeButton = button()
 genEnergyUpgradeBuffButton = button()
 
+#                [Button_Name, [[Button_Text],    Text_Color,  xPos, yPos]]
 buttonVarList = [[genButton, [["Click to gen"], (255, 255, 255), 150, 100]],
                  [shopButton, [["Shop"], (255, 255, 255), 150, 150]],
                  [shopBackButton, [["Back"], (255, 255, 255), 100, 100]],
