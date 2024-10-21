@@ -1,5 +1,5 @@
 import pygame as pg
-import screen, upgrade
+import game, upgrade
 
 class button:
     def __init__(self, textList: list, textColor, xPos: int, yPos: int):
@@ -22,17 +22,17 @@ class button:
         self.rect.y = yPos
     
     def drawButton(self, buttonColor):
-        pg.draw.rect(screen.gameScreen, buttonColor, self.rect)
+        pg.draw.rect(game.gameScreen, buttonColor, self.rect)
         widthL = []
         for e in self.lineVarList:
             widthL += [e.get_width()]
         yOffset = 0
         for e in self.lineVarList:
             if e.get_width() == max(widthL):
-                screen.gameScreen.blit(e, (self.rect.x, self.rect.y + yOffset))
+                game.gameScreen.blit(e, (self.rect.x, self.rect.y + yOffset))
                 yOffset += e.get_height()
             else:
-                screen.gameScreen.blit(e, (self.rect.x + (max(widthL) / 2) - (e.get_width() / 2), self.rect.y + yOffset))
+                game.gameScreen.blit(e, (self.rect.x + (max(widthL) / 2) - (e.get_width() / 2), self.rect.y + yOffset))
                 yOffset += e.get_height()
     
     def updateText(self, text: str, line: int):
