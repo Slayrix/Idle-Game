@@ -1,5 +1,5 @@
 Created: 10/20/24
 Archived: 
 
-Restructured code to be more modular
+Restructured code to be more modular by making multiple modules
 Fixed bug that allowed to enter shop early

@@ -1,171 +1,21 @@
 import pygame as pg
-import time, asyncio
-
-pg.init()
-screen = pg.display.set_mode((1000, 1000))
-
-class currency:
-    def __init__(self):
-        self.amount = 0
-        self.gainPerSecond = 0
-        self.costToGen = 0
-
-    def addOne(self):
-        self.amount += 1
-    
-    def addAmount(self, x):
-        self.amount = round(self.amount + x, 2)
-
-    def subAmount(self, x):
-        self.amount = round(self.amount - x, 2)
-    
-    def addGainPerSecond(self, x):
-        self.gainPerSecond += x
-
-    def addCostToGen(self, x):
-        self.costToGen += x
-
-class upgrade():
-    def __init__(self, cost, currencyCost, growthRate = 0, increaseGenPerSecondCurrency = None, increaseGenPerSecondAmount = None, increaseCostPerGenCurrency = None, increaseCostPerGenAmount = None):
-        self.cost = cost
-        self.currencyCost = currencyCost
-        self.level = 0
-        self.growthRate = growthRate
-        self.increaseGenPerSecondCurrency = increaseGenPerSecondCurrency
-        self.increaseGenPerSecondAmount = increaseGenPerSecondAmount
-        self.increaseCostPerGenCurrency = increaseCostPerGenCurrency
-        self.increaseCostPerGenAmount = increaseCostPerGenAmount
-    
-    def increaseCost(self):
-        self.cost = round(self.cost*(1+self.growthRate)**self.level, 2)
-
-class upgradeBuff():
-    def __init__(self, cost, currencyCost, upgradeBuffed, upgradeVarBuffed, buffedAmount, growthRate = 0):
-        self.cost = cost
-        self.currencyCost = currencyCost
-        self.level = 0
-        self.upgradeBuffed = upgradeBuffed
-        self.upgradeVarBuffed = upgradeVarBuffed
-        self.buffedAmount = buffedAmount
-        self.growthRate = growthRate
-
-    def increaseCost(self):
-        self.cost = round(self.cost*(1+self.growthRate)**self.level, 2)
-
-class text:
-    def __init__(self):
-        self.font = pg.font.Font("arial.ttf", 30)
-    
-    def setText(self, text: str, textColor, backgroundColor = None):
-        self.text = self.font.render(text, True, textColor, backgroundColor)
-
-class button():
-    def __init__(self, textList: list, textColor, xPos: int, yPos: int):
-        self.font = pg.font.Font("arial.ttf", 30)
-        self.lineVarList = []
-        self.textColor = textColor
-        widthList = []
-        height = 0
-        i = 0
-        for e in textList:
-            self.lineVarList += [self.font.render(textList[i], True, self.textColor)]
-            if i == 0:
-                self.rect = self.lineVarList[i].get_rect()
-            widthList += [self.lineVarList[i].get_width()]
-            height += self.lineVarList[i].get_height()
-            i += 1
-        self.rect.width = max(widthList)
-        self.rect.height = height
-        self.rect.x = xPos
-        self.rect.y = yPos
-    
-    def drawButton(self, buttonColor):
-        pg.draw.rect(screen, buttonColor, self.rect)
-        widthL = []
-        for e in self.lineVarList:
-            widthL += [e.get_width()]
-        yOffset = 0
-        for e in self.lineVarList:
-            if e.get_width() == max(widthL):
-                screen.blit(e, (self.rect.x, self.rect.y + yOffset))
-                yOffset += e.get_height()
-            else:
-                screen.blit(e, (self.rect.x + (max(widthL) / 2) - (e.get_width() / 2), self.rect.y + yOffset))
-                yOffset += e.get_height()
-    
-    def updateText(self, text: str, line: int):
-        self.lineVarList[line] = self.font.render(text, True, self.textColor)
-
-class menu():
-    def __init__(self):
-        self.currentMenu = "defaultMenu"
-    
-    def setCurrentMenuToDefaultMenu(self):
-        self.currentMenu = "defaultMenu"
-
-    def setCurrentMenuToShop(self):
-        self.currentMenu = "shop"
-
-menuVar = menu()
-
-energy = currency()
-matter = currency()
-
-bigBangUpgrade = upgrade(10, energy, 0, matter, .01, matter, 10)
-genEnergyUpgrade = upgrade(.05, matter, .1, energy, 1)
-matterGenUpgrade = upgrade(.15, matter, 6, matter, "double", matter, 10)
-
-genEnergyUpgradeBuff = upgradeBuff(.5, matter, genEnergyUpgrade, "increaseGenPerSecondAmount", "double")
-
-energyText = text()
-matterText = text()
-
-genButton = button(["Click to gen"], (255, 255, 255), 150, 100)
-
-shopButton = button(["Shop"], (255, 255, 255), 150, 150)
-shopBackButton = button(["Back"], (255, 255, 255), 100, 100)
-
-bigBangButton = button(["Start Big Bang", str(bigBangUpgrade.cost) + " Energy"], (255, 255, 255), 150, 150)
-genEnergyUpgradeButton = button(["Upgrade 1", "Auto gen +" + str(genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(genEnergyUpgrade.cost) + " Matter"], (255, 255, 255), 150, 230)
-matterGenUpgradeButton = button(["Double Matter Generation", "Increases energy consumption by +10", str(matterGenUpgrade.cost) + " Matter"], (255, 255, 255), 150, 350)
-genEnergyUpgradeBuffButton = button(["Double Energy Generation of Upgrade 1", str(genEnergyUpgradeBuff.cost) + " Matter"], (255, 255, 255), 150, 470)
+import time, asyncio, menu, currency, upgrade, text, button, screen
 
 def genEnergy():
-    energy.addOne()
+    currency.energy.addOne()
     updateScreen()
 
-def displayMenu ():
-    if menuVar.currentMenu == "defaultMenu":
-        screen.blit(energyText.text, (0,0))
-
-        genButton.drawButton((92, 92, 92))
-    
-        if bigBangUpgrade.level == 0 and energy.amount >= bigBangUpgrade.cost:
-            bigBangButton.drawButton((92, 92, 92))
-        elif bigBangUpgrade.level >= 1:
-            screen.blit(matterText.text, (0,50))
-            shopButton.drawButton((92, 92, 92))
-    elif menuVar.currentMenu == "shop":
-        screen.blit(energyText.text, (0,0))
-        screen.blit(matterText.text, (0,50))
-
-        shopBackButton.drawButton((92, 92, 92))
-
-        genEnergyUpgradeButton.drawButton((92, 92, 92))
-        matterGenUpgradeButton.drawButton((92, 92, 92))
-        genEnergyUpgradeBuffButton.drawButton((92, 92, 92))
-
 def updateScreen():
-    screen.fill((0, 0, 0))
+    screen.gameScreen.fill((0, 0, 0))
 
-    energyText.setText("Energy: " + str(energy.amount), (255, 255, 255))
-    matterText.setText("Matter: "+ str(matter.amount), (255, 255, 255))
+    text.energyText.setText("Energy: " + str(currency.energy.amount), (255, 255, 255))
+    text.matterText.setText("Matter: "+ str(currency.matter.amount), (255, 255, 255))
 
-    genEnergyUpgradeButton.updateText("Auto gen +" + str(genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", 1)
-    genEnergyUpgradeButton.updateText(str(genEnergyUpgrade.cost) + " Matter", 2)
-    matterGenUpgradeButton.updateText(str(matterGenUpgrade.cost) + " Matter", 2)
+    button.genEnergyUpgradeButton.updateText("Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", 1)
+    button.genEnergyUpgradeButton.updateText(str(upgrade.genEnergyUpgrade.cost) + " Matter", 2)
+    button.matterGenUpgradeButton.updateText(str(upgrade.matterGenUpgrade.cost) + " Matter", 2)
 
-    displayMenu()
+    menu.displayMenu()
 
     pg.display.update()
 
@@ -182,7 +32,7 @@ def buyUpgrade(upgrade: upgrade):
         if upgrade.increaseCostPerGenCurrency != None:
             upgrade.increaseCostPerGenCurrency.addCostToGen(upgrade.increaseCostPerGenAmount)
         
-def buyUpgradeBuff(upgradeBuff: upgradeBuff):
+def buyUpgradeBuff(upgradeBuff: upgrade.upgradeBuff):
     if upgradeBuff.currencyCost.amount >= upgradeBuff.cost:
         upgradeBuff.currencyCost.subAmount(upgradeBuff.cost)
         upgradeBuff.level += 1
@@ -196,11 +46,11 @@ def buyUpgradeBuff(upgradeBuff: upgradeBuff):
                 upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount += upgradeBuff.buffedAmount
             
 def calculations():
-    energy.addAmount(energy.gainPerSecond)
+    currency.energy.addAmount(currency.energy.gainPerSecond)
 
-    if energy.amount >= matter.costToGen:
-        energy.subAmount(matter.costToGen)
-        matter.addAmount(matter.gainPerSecond)
+    if currency.energy.amount >= currency.matter.costToGen:
+        currency.energy.subAmount(currency.matter.costToGen)
+        currency.matter.addAmount(currency.matter.gainPerSecond)
 
 def gameTick(tick):
     tick += 1
@@ -209,37 +59,50 @@ def gameTick(tick):
         tick = 0
     return tick
 
-async def main():
-    running = True
-    tick = 0
-    while running:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                running = False
-            
-            if event.type == pg.MOUSEBUTTONDOWN:
-                if menuVar.currentMenu == "defaultMenu":
-                    if genButton.rect.collidepoint(event.pos):
-                        genEnergy()
-                
-                    if bigBangButton.rect.collidepoint(event.pos) and bigBangUpgrade.level <= 0:
-                        buyUpgrade(bigBangUpgrade)
-                    
-                    if shopButton.rect.collidepoint(event.pos):
-                        menuVar.setCurrentMenuToShop()
-                if menuVar.currentMenu == "shop":
-                    if genEnergyUpgradeButton.rect.collidepoint(event.pos):
-                        buyUpgrade(genEnergyUpgrade)
-                
-                    if matterGenUpgradeButton.rect.collidepoint(event.pos):
-                        buyUpgrade(matterGenUpgrade)
+def eventCheck(running):
+    for event in pg.event.get():
+        running = checkIfQuit(event, running)
+        mouseClickCheck(event)    
+    return running
 
-                    if genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
-                        buyUpgradeBuff(genEnergyUpgradeBuff)
-                
-                    if shopBackButton.rect.collidepoint(event.pos):
-                        menuVar.setCurrentMenuToDefaultMenu()
-            
+def checkIfQuit(event, running):
+    if event.type == pg.QUIT:
+        running = False
+    return running
+
+def mouseClickCheck(event):
+    if event.type == pg.MOUSEBUTTONDOWN:
+        checkIfButtonClicked(event)
+        
+def checkIfButtonClicked(event):
+    if menu.menuVar.currentMenu == "defaultMenu":
+        if button.shopButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level >= 1:
+            menu.menuVar.setCurrentMenuToShop()
+
+        if button.genButton.rect.collidepoint(event.pos):
+            genEnergy()
+    
+        if button.bigBangButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level <= 0:
+            buyUpgrade(upgrade.bigBangUpgrade)
+
+    if menu.menuVar.currentMenu == "shop":
+        if button.genEnergyUpgradeButton.rect.collidepoint(event.pos):
+            buyUpgrade(upgrade.genEnergyUpgrade)
+    
+        if button.matterGenUpgradeButton.rect.collidepoint(event.pos):
+            buyUpgrade(upgrade.matterGenUpgrade)
+
+        if button.genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
+            buyUpgradeBuff(upgrade.genEnergyUpgradeBuff)
+    
+        if button.shopBackButton.rect.collidepoint(event.pos):
+            menu.menuVar.setCurrentMenuToDefaultMenu()
+  
+async def main():
+    tick = 0
+    running = True
+    while running:
+        running = eventCheck(running)
         updateScreen()
         tick = gameTick(tick)
         time.sleep(.01)
