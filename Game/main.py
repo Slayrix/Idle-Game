@@ -18,33 +18,7 @@ def updateScreen():
     menu.displayMenu()
 
     pg.display.update()
-
-def buyUpgrade(upgrade: upgrade):
-    if upgrade.currencyCost.amount >= upgrade.cost:
-        upgrade.currencyCost.subAmount(upgrade.cost)
-        upgrade.level += 1
-        upgrade.increaseCost()
-        if upgrade.increaseGenPerSecondCurrency != None:
-            if upgrade.increaseGenPerSecondAmount == "double":
-                upgrade.increaseGenPerSecondCurrency.addGainPerSecond(upgrade.increaseGenPerSecondCurrency.gainPerSecond)
-            else:
-                upgrade.increaseGenPerSecondCurrency.addGainPerSecond(upgrade.increaseGenPerSecondAmount)
-        if upgrade.increaseCostPerGenCurrency != None:
-            upgrade.increaseCostPerGenCurrency.addCostToGen(upgrade.increaseCostPerGenAmount)
-        
-def buyUpgradeBuff(upgradeBuff: upgrade.upgradeBuff):
-    if upgradeBuff.currencyCost.amount >= upgradeBuff.cost:
-        upgradeBuff.currencyCost.subAmount(upgradeBuff.cost)
-        upgradeBuff.level += 1
-        upgradeBuff.increaseCost()
-        if upgradeBuff.upgradeVarBuffed == "increaseGenPerSecondAmount":
-            if upgradeBuff.buffedAmount == "double":
-                upgradeBuff.upgradeBuffed.increaseGenPerSecondCurrency.addGainPerSecond(upgradeBuff.upgradeBuffed.level*upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount)
-                upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount += upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount
-            else:
-                upgradeBuff.upgradeBuffed.increaseGenPerSecondCurrency.addGainPerSecond(upgradeBuff.upgradeBuffed.level*upgradeBuff.buffedAmount)
-                upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount += upgradeBuff.buffedAmount
-            
+   
 def calculations():
     currency.energy.addAmount(currency.energy.gainPerSecond)
 
@@ -83,22 +57,22 @@ def checkIfButtonClicked(event):
             genEnergy()
     
         if button.bigBangButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level <= 0:
-            buyUpgrade(upgrade.bigBangUpgrade)
+            upgrade.buyUpgrade(upgrade.bigBangUpgrade)
 
     if menu.menuVar.currentMenu == "shop":
         if button.genEnergyUpgradeButton.rect.collidepoint(event.pos):
-            buyUpgrade(upgrade.genEnergyUpgrade)
+            upgrade.buyUpgrade(upgrade.genEnergyUpgrade)
     
         if button.matterGenUpgradeButton.rect.collidepoint(event.pos):
-            buyUpgrade(upgrade.matterGenUpgrade)
+            upgrade.buyUpgrade(upgrade.matterGenUpgrade)
 
         if button.genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
-            buyUpgradeBuff(upgrade.genEnergyUpgradeBuff)
+            upgrade.buyUpgradeBuff(upgrade.genEnergyUpgradeBuff)
     
         if button.shopBackButton.rect.collidepoint(event.pos):
             menu.menuVar.setCurrentMenuToDefaultMenu()
   
-async def main():
+async def gameLoop():
     tick = 0
     running = True
     while running:
@@ -108,5 +82,5 @@ async def main():
         time.sleep(.01)
         await asyncio.sleep(0)
 
-asyncio.run(main())
+asyncio.run(gameLoop())
 pg.quit()

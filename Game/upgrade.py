@@ -27,6 +27,32 @@ class upgradeBuff:
     def increaseCost(self):
         self.cost = round(self.cost*(1+self.growthRate)**self.level, 2)
 
+def buyUpgrade(upgrade: upgrade):
+    if upgrade.currencyCost.amount >= upgrade.cost:
+        upgrade.currencyCost.subAmount(upgrade.cost)
+        upgrade.level += 1
+        upgrade.increaseCost()
+        if upgrade.increaseGenPerSecondCurrency != None:
+            if upgrade.increaseGenPerSecondAmount == "double":
+                upgrade.increaseGenPerSecondCurrency.addGainPerSecond(upgrade.increaseGenPerSecondCurrency.gainPerSecond)
+            else:
+                upgrade.increaseGenPerSecondCurrency.addGainPerSecond(upgrade.increaseGenPerSecondAmount)
+        if upgrade.increaseCostPerGenCurrency != None:
+            upgrade.increaseCostPerGenCurrency.addCostToGen(upgrade.increaseCostPerGenAmount)
+        
+def buyUpgradeBuff(upgradeBuff: upgradeBuff):
+    if upgradeBuff.currencyCost.amount >= upgradeBuff.cost:
+        upgradeBuff.currencyCost.subAmount(upgradeBuff.cost)
+        upgradeBuff.level += 1
+        upgradeBuff.increaseCost()
+        if upgradeBuff.upgradeVarBuffed == "increaseGenPerSecondAmount":
+            if upgradeBuff.buffedAmount == "double":
+                upgradeBuff.upgradeBuffed.increaseGenPerSecondCurrency.addGainPerSecond(upgradeBuff.upgradeBuffed.level*upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount)
+                upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount += upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount
+            else:
+                upgradeBuff.upgradeBuffed.increaseGenPerSecondCurrency.addGainPerSecond(upgradeBuff.upgradeBuffed.level*upgradeBuff.buffedAmount)
+                upgradeBuff.upgradeBuffed.increaseGenPerSecondAmount += upgradeBuff.buffedAmount
+
 bigBangUpgrade = upgrade(10, currency.energy, 0, currency.matter, .01, currency.matter, 10)
 genEnergyUpgrade = upgrade(.05, currency.matter, .1, currency.energy, 1)
 matterGenUpgrade = upgrade(.15, currency.matter, 6, currency.matter, "double", currency.matter, 10)
