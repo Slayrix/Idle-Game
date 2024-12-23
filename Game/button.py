@@ -41,11 +41,6 @@ class button:
     def updateText(self, text: str, line: int):
         self.lineVarList[line] = self.font.render(text, True, self.textColor)
 
-def createButtons(buttonVarList):
-    for buttonList in buttonVarList:
-        buttonVar = buttonList[0]
-        buttonVar.setButton(*buttonList[1])
-
 genButton = button(["Click to gen"], (255, 255, 255), 150, 100)
 shopButton = button(["Shop"], (255, 255, 255), 150, 150)
 shopBackButton = button(["Back"], (255, 255, 255), 100, 100)
