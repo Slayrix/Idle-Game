@@ -53,17 +53,3 @@ bigBangButton = button(["Start Big Bang", str(upgrade.bigBangUpgrade.cost) + " E
 genEnergyUpgradeButton = button(["Upgrade 1", "Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(upgrade.genEnergyUpgrade.cost) + " Matter"], (255, 255, 255), 150, 230)
 matterGenUpgradeButton = button(["Double Matter Generation", "Increases energy consumption by +10", str(upgrade.matterGenUpgrade.cost) + " Matter"], (255, 255, 255), 150, 350)
 genEnergyUpgradeBuffButton = button(["Double Energy Generation of Upgrade 1", str(upgrade.genEnergyUpgradeBuff.cost) + " Matter"], (255, 255, 255), 150, 470)
-
-"""
-#                [Button_Name, [[Button_Text],    Text_Color,  xPos, yPos]]
-buttonVarList = [[genButton, [["Click to gen"], (255, 255, 255), 150, 100]],
-                 [shopButton, [["Shop"], (255, 255, 255), 150, 150]],
-                 [shopBackButton, [["Back"], (255, 255, 255), 100, 100]],
-                 [bigBangButton, [["Start Big Bang", str(upgrade.bigBangUpgrade.cost) + " Energy"], (255, 255, 255), 150, 150]],
-                 [genEnergyUpgradeButton, [["Upgrade 1", "Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(upgrade.genEnergyUpgrade.cost) + " Matter"], (255, 255, 255), 150, 230]],
-                 [matterGenUpgradeButton, [["Double Matter Generation", "Increases energy consumption by +10", str(upgrade.matterGenUpgrade.cost) + " Matter"], (255, 255, 255), 150, 350]],
-                 [genEnergyUpgradeBuffButton, [["Double Energy Generation of Upgrade 1", str(upgrade.genEnergyUpgradeBuff.cost) + " Matter"], (255, 255, 255), 150, 470]]
-                ]
-
-createButtons(buttonVarList)
-"""
