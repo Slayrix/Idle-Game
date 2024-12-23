@@ -1,10 +1,11 @@
 import pygame as pg
-import menu, upgrade, button, game
+import menu, upgrade, button, game, cheats
 
 def eventCheck(running):
     for event in pg.event.get():
         running = checkIfQuit(event, running)
-        mouseClickCheck(event)    
+        mouseClickCheck(event)
+        checkIfKeyPressed(event)
     return running
 
 def checkIfQuit(event, running):
@@ -39,3 +40,32 @@ def checkIfButtonClicked(event):
     
         if button.shopBackButton.rect.collidepoint(event.pos):
             menu.menuVar.setCurrentMenuToDefaultMenu()
+
+    if cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+        cheats.cheatsTextBox.setSelected(True)
+    elif not cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+        cheats.cheatsTextBox.setSelected(False)
+    
+def checkIfKeyPressed(event):
+    shiftPressed = checkIfShiftPressed()
+    if event.type == pg.KEYDOWN and event.key >= 97 and event.key <= 122:
+        if shiftPressed == True:
+            subAmount = 32
+        else:
+            subAmount = 0
+        if cheats.cheatsTextBox.selected == True:
+            cheats.cheatsTextBox.addTextToTextBox(chr(event.key - subAmount))
+    elif event.type == pg.KEYDOWN and event.key >= 48 and event.key <= 57:
+        if cheats.cheatsTextBox.selected == True:
+            cheats.cheatsTextBox.addTextToTextBox(chr(event.key))
+    if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
+        if cheats.cheatsTextBox.selected == True:
+            cheats.cheatsTextBox.delTextFromTextBox()
+
+def checkIfShiftPressed():
+    pressedKeys = pg.key.get_pressed()
+    if pressedKeys[pg.K_LSHIFT]:
+        shiftPressed = True
+    else:
+        shiftPressed = False
+    return shiftPressed

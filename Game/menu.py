@@ -1,4 +1,4 @@
-import game, currency, upgrade, text, button
+import game, currency, upgrade, text, button, cheats
 
 class menu:
     def __init__(self):
@@ -21,6 +21,8 @@ def displayMenu():
         elif upgrade.bigBangUpgrade.level >= 1:
             game.gameScreen.blit(text.matterText.text, (0,50))
             button.shopButton.drawButton((92, 92, 92))
+        
+        cheats.cheatsTextBox.drawTextBox()
     elif menuVar.currentMenu == "shop":
         game.gameScreen.blit(text.energyText.text, (0,0))
         game.gameScreen.blit(text.matterText.text, (0,50))
