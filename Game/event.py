@@ -35,7 +35,7 @@ def checkIfButtonClicked(event):
             upgrade.buyUpgrade(upgrade.matterGenUpgrade)
 
         if button.genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
-            upgrade.buyUpgradeBuff(upgrade.genEnergyUpgradeBuff)
+            upgrade.buyUpgrade(upgrade.genEnergyUpgradeBuff)
     
         if button.shopBackButton.rect.collidepoint(event.pos):
             menu.menuVar.setCurrentMenuToDefaultMenu()
