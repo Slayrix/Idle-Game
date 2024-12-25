@@ -27,8 +27,10 @@ def checkIfButtonClicked(event):
     
         if button.bigBangButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level <= 0:
             upgrade.buyUpgrade(upgrade.bigBangUpgrade)
-
-    if menu.menuVar.currentMenu == "shop":
+        
+        if button.cheatsMenuButton.rect.collidepoint(event.pos):
+            menu.menuVar.setCurrentMenuToCheats()
+    elif menu.menuVar.currentMenu == "shop":
         if button.genEnergyUpgradeButton.rect.collidepoint(event.pos):
             upgrade.buyUpgrade(upgrade.genEnergyUpgrade)
     
@@ -40,11 +42,14 @@ def checkIfButtonClicked(event):
     
         if button.shopBackButton.rect.collidepoint(event.pos):
             menu.menuVar.setCurrentMenuToDefaultMenu()
+    elif menu.menuVar.currentMenu == "cheats":
+        if cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+            cheats.cheatsTextBox.setSelected(True)
+        elif not cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+            cheats.cheatsTextBox.setSelected(False)
+        if button.cheatsBackButton.rect.collidepoint(event.pos):
+            menu.menuVar.setCurrentMenuToDefaultMenu()
 
-    if cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
-        cheats.cheatsTextBox.setSelected(True)
-    elif not cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
-        cheats.cheatsTextBox.setSelected(False)
     
 def checkIfKeyPressed(event):
     shiftPressed = checkIfShiftPressed()

@@ -48,3 +48,5 @@ bigBangButton = button(["Start Big Bang", str(upgrade.bigBangUpgrade.cost) + " E
 genEnergyUpgradeButton = button(["Upgrade 1", "Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(upgrade.genEnergyUpgrade.cost) + " Matter"], (255, 255, 255), 150, 230)
 matterGenUpgradeButton = button(["Double Matter Generation", "Increases energy consumption by +10", str(upgrade.matterGenUpgrade.cost) + " Matter"], (255, 255, 255), 150, 350)
 genEnergyUpgradeBuffButton = button(["Double Energy Generation of Upgrade 1", str(upgrade.genEnergyUpgradeBuff.cost) + " Matter"], (255, 255, 255), 150, 470)
+cheatsMenuButton = button(["Open Cheats Menu"], (255, 255, 255), 100, 400)
+cheatsBackButton = button(["Go Back"], (255, 255, 255), 100, 400)

@@ -44,4 +44,4 @@ class textBox:
             self.textString = self.textString[0:len(self.textString) - 1]
             self.text = self.font.render(self.textString, True, (0, 0, 0))
 
-cheatsTextBox = textBox(100, 300)
+cheatsTextBox = textBox(100, 200)

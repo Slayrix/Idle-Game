@@ -9,6 +9,9 @@ class menu:
 
     def setCurrentMenuToShop(self):
         self.currentMenu = "shop"
+    
+    def setCurrentMenuToCheats(self):
+        self.currentMenu = "cheats"
 
 def displayMenu():
     if menuVar.currentMenu == "defaultMenu":
@@ -22,7 +25,7 @@ def displayMenu():
             game.gameScreen.blit(text.matterText.text, (0,50))
             button.shopButton.drawButton((92, 92, 92))
         
-        cheats.cheatsTextBox.drawTextBox()
+        button.cheatsMenuButton.drawButton((92, 92, 92))
     elif menuVar.currentMenu == "shop":
         game.gameScreen.blit(text.energyText.text, (0,0))
         game.gameScreen.blit(text.matterText.text, (0,50))
@@ -32,5 +35,12 @@ def displayMenu():
         button.genEnergyUpgradeButton.drawButton((92, 92, 92))
         button.matterGenUpgradeButton.drawButton((92, 92, 92))
         button.genEnergyUpgradeBuffButton.drawButton((92, 92, 92))
+    elif menuVar.currentMenu == "cheats":
+        game.gameScreen.blit(text.energyText.text, (0,0))
+        game.gameScreen.blit(text.matterText.text, (0,50))
+
+        cheats.cheatsTextBox.drawTextBox()
+
+        button.cheatsBackButton.drawButton((92, 92, 92))
 
 menuVar = menu()
