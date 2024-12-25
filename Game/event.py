@@ -50,7 +50,6 @@ def checkIfButtonClicked(event):
         if button.cheatsBackButton.rect.collidepoint(event.pos):
             menu.menuVar.setCurrentMenuToDefaultMenu()
 
-    
 def checkIfKeyPressed(event):
     shiftPressed = checkIfShiftPressed()
     if event.type == pg.KEYDOWN and event.key >= 97 and event.key <= 122:
