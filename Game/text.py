@@ -1,5 +1,5 @@
 import pygame as pg
-import list, upgrade, game
+import list, upgrade, game, menu
 
 pg.init()
 
@@ -19,23 +19,26 @@ class text:
         game.gameScreen.blit(self.text, (self.xPos, self.yPos))
 
     def showText(self):
-        conditions = self.drawConditions
-        if conditions == None:
-            return True
-        else:
-            val = False
-            objVar = conditions[0]
-            if conditions[1] == "level":
-                if conditions[2] == "=":
-                    if objVar.level == conditions[3]:
-                        val = True
-                elif conditions[2] == ">":
-                    if objVar.level > conditions[3]:
-                        val = True
-                if val == True:
+        for menuVar in self.activeMenu:
+            if menuVar == menu.menuVar.currentMenu:
+                conditions = self.drawConditions
+                if conditions == None:
                     return True
                 else:
-                    return False
+                    val = False
+                    objVar = conditions[0]
+                    if conditions[1] == "level":
+                        if conditions[2] == "=":
+                            if objVar.level == conditions[3]:
+                                val = True
+                        elif conditions[2] == ">":
+                            if objVar.level > conditions[3]:
+                                val = True
+                        if val == True:
+                            return True
+                        else:
+                            return False
+        return False
 
 textList = list.list()
 

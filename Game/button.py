@@ -1,8 +1,9 @@
 import pygame as pg
-import game, upgrade, list
+import game, upgrade, list, menu
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, name, drawConditions: list = None):
+        pg.font.init()
         self.font = pg.font.Font("arial.ttf", 30)
         self.lineVarList = []
         self.setButton(textList, textColor, xPos, yPos)
@@ -47,23 +48,26 @@ class button:
         self.lineVarList[line] = self.font.render(text, True, self.textColor)
     
     def showButton(self):
-        conditions = self.drawConditions
-        if conditions == None:
-            return True
-        else:
-            val = False
-            objVar = conditions[0]
-            if conditions[1] == "level":
-                if conditions[2] == "=":
-                    if objVar.level == conditions[3]:
-                        val = True
-                elif conditions[2] == ">":
-                    if objVar.level > conditions[3]:
-                        val = True
-                if val == True:
+        for menuVar in self.activeMenu:
+            if menuVar == menu.menuVar.currentMenu:
+                conditions = self.drawConditions
+                if conditions == None:
                     return True
                 else:
-                    return False
+                    val = False
+                    objVar = conditions[0]
+                    if conditions[1] == "level":
+                        if conditions[2] == "=":
+                            if objVar.level == conditions[3]:
+                                val = True
+                        elif conditions[2] == ">":
+                            if objVar.level > conditions[3]:
+                                val = True
+                        if val == True:
+                            return True
+                        else:
+                            return False
+            return False
 
 buttonList = list.list()
 
