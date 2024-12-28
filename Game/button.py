@@ -1,9 +1,5 @@
 import pygame as pg
-import game, upgrade
-
-class list:
-    def __init__(self):
-        self.list = []
+import game, upgrade, list
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, name, drawConditions: list = None):
@@ -69,8 +65,7 @@ class button:
                 else:
                     return False
 
-
-buttonList = list()
+buttonList = list.list()
 
 genButton = button(["Click to gen"], ["defaultMenu"], (255, 255, 255), 150, 100, "genButton")
 shopButton = button(["Shop"], ["defaultMenu"], (255, 255, 255), 150, 150, "shopButton", [upgrade.bigBangUpgrade, "level", ">", 0])

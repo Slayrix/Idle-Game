@@ -1,4 +1,4 @@
-import game, text, button, cheats
+import text, button, cheats
 
 class menu:
     def __init__(self):
@@ -19,8 +19,12 @@ def displayMenu():
             if menu == menuVar.currentMenu:
                 if buttonVar.showButton() == True:
                     buttonVar.drawButton((92, 92, 92))
-    game.gameScreen.blit(text.energyText.text, (0,0))
-    game.gameScreen.blit(text.matterText.text, (0,50))
+    
+    for textVar in text.textList.list:
+        for menu in textVar.activeMenu:
+            if menu == menuVar.currentMenu:
+                if textVar.showText() == True:
+                    textVar.drawText()
 
     if menuVar.currentMenu == "cheats":
         cheats.cheatsTextBox.drawTextBox()
