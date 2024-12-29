@@ -1,5 +1,5 @@
 import pygame as pg
-import menu, upgrade, button, game, cheats
+import menu, button, cheats
 
 def eventCheck(running):
     for event in pg.event.get():
@@ -18,31 +18,11 @@ def mouseClickCheck(event):
         checkIfButtonClicked(event)
         
 def checkIfButtonClicked(event):
-    if menu.menuVar.currentMenu == "defaultMenu":
-        if button.shopButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level >= 1:
-            menu.menuVar.setCurrentMenuToShop()
+    for buttonVar in button.buttonList.list:
+        if buttonVar.rect.collidepoint(event.pos):
+            buttonVar.buttonClicked()
 
-        if button.genButton.rect.collidepoint(event.pos):
-            game.genEnergy()
-    
-        if button.bigBangButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level <= 0:
-            upgrade.buyUpgrade(upgrade.bigBangUpgrade)
-        
-        if button.cheatsMenuButton.rect.collidepoint(event.pos):
-            menu.menuVar.setCurrentMenuToCheats()
-    elif menu.menuVar.currentMenu == "shop":
-        if button.genEnergyUpgradeButton.rect.collidepoint(event.pos):
-            upgrade.buyUpgrade(upgrade.genEnergyUpgrade)
-    
-        if button.matterGenUpgradeButton.rect.collidepoint(event.pos):
-            upgrade.buyUpgrade(upgrade.matterGenUpgrade)
-
-        if button.genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
-            upgrade.buyUpgrade(upgrade.genEnergyUpgradeBuff)
-    
-        if button.shopBackButton.rect.collidepoint(event.pos):
-            menu.menuVar.setCurrentMenuToDefaultMenu()
-    elif menu.menuVar.currentMenu == "cheats":
+    if menu.menuVar.currentMenu == "cheats":
         if cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
             cheats.cheatsTextBox.setSelected(True)
         elif not cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
