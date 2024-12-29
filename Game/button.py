@@ -85,8 +85,6 @@ class button:
             elif self.buttonFunctionality[0] == "buyUpdrade":
                 upgrade.buyUpgrade(self.buttonFunctionality[1])
 
-            
-
 buttonList = list.list()
 
 genButton = button(["Click to gen"], ["defaultMenu"], (255, 255, 255), 150, 100, ["genCurrency", 1, currency.energy])
