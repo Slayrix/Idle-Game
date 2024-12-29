@@ -17,6 +17,8 @@ def displayMenu():
     for buttonVar in button.buttonList.list:
         if buttonVar.showButton() == True:
             buttonVar.drawButton((92, 92, 92))
+        else:
+            buttonVar.setXYPosition(10000, 10000)
     
     for textVar in text.textList.list:
         if textVar.showText() == True:

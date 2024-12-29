@@ -6,13 +6,15 @@ class button:
         pg.font.init()
         self.font = pg.font.Font("arial.ttf", 30)
         self.lineVarList = []
-        self.setButton(textList, textColor, xPos, yPos)
+        self.xPos = xPos
+        self.yPos = yPos
+        self.setButton(textList, textColor)
         self.activeMenu = activeMenuList
         buttonList.list += [self]
         self.drawConditions = drawConditions
         self.buttonFunctionality = buttonFunctionality
 
-    def setButton(self, textList: list, textColor, xPos: int, yPos: int):
+    def setButton(self, textList: list, textColor):
         self.textColor = textColor
         widthList = []
         height = 0
@@ -26,10 +28,14 @@ class button:
             i += 1
         self.rect.width = max(widthList)
         self.rect.height = height
+        self.setXYPosition(10000, 10000)
+    
+    def setXYPosition(self, xPos, yPos):
         self.rect.x = xPos
         self.rect.y = yPos
     
     def drawButton(self, buttonColor):
+        self.setXYPosition(self.xPos, self.yPos)
         pg.draw.rect(game.gameScreen, buttonColor, self.rect)
         widthL = []
         for e in self.lineVarList:
@@ -69,8 +75,6 @@ class button:
             return False
     
     def buttonClicked(self):
-        if self.buttonFunctionality == []:
-            return
         if self.showButton() == True:
             if self.buttonFunctionality[0] == "genCurrency":
                 upgradeVar = self.buttonFunctionality[2]
@@ -89,10 +93,10 @@ buttonList = list.list()
 
 genButton = button(["Click to gen"], ["defaultMenu"], (255, 255, 255), 150, 100, ["genCurrency", 1, currency.energy])
 shopButton = button(["Shop"], ["defaultMenu"], (255, 255, 255), 150, 150, ["changeMenu", "shop"], [upgrade.bigBangUpgrade, "level", ">", 0])
-shopBackButton = button(["Back"], ["shop"], (255, 255, 255), 100, 100, ["changeMenu", "default"])
+shopBackButton = button(["Back"], ["shop"], (255, 255, 255), 150, 150, ["changeMenu", "default"])
 bigBangButton = button(["Start Big Bang", str(upgrade.bigBangUpgrade.cost) + " Energy"], ["defaultMenu"], (255, 255, 255), 150, 150, ["buyUpdrade", upgrade.bigBangUpgrade], [upgrade.bigBangUpgrade, "level", "=", 0])
 genEnergyUpgradeButton = button(["Upgrade 1", "Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(upgrade.genEnergyUpgrade.cost) + " Matter"], ["shop"], (255, 255, 255), 150, 230, ["buyUpdrade", upgrade.genEnergyUpgrade])
 matterGenUpgradeButton = button(["Double Matter Generation", "Increases energy consumption by +10", str(upgrade.matterGenUpgrade.cost) + " Matter"], ["shop"], (255, 255, 255), 150, 350, ["buyUpdrade", upgrade.matterGenUpgrade])
 genEnergyUpgradeBuffButton = button(["Double Energy Generation of Upgrade 1", str(upgrade.genEnergyUpgradeBuff.cost) + " Matter"], ["shop"], (255, 255, 255), 150, 470, ["buyUpdrade", upgrade.genEnergyUpgradeBuff])
-cheatsMenuButton = button(["Open Cheats Menu"], ["defaultMenu"], (255, 255, 255), 100, 400, ["changeMenu", "cheats"])
-cheatsBackButton = button(["Go Back"], ["cheats"], (255, 255, 255), 100, 400, ["changeMenu", "default"])
+cheatsMenuButton = button(["Open Cheats Menu"], ["defaultMenu"], (255, 255, 255), 100, 300, ["changeMenu", "cheats"])
+cheatsBackButton = button(["Go Back"], ["cheats"], (255, 255, 255), 100, 300, ["changeMenu", "default"])
