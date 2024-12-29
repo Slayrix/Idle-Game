@@ -29,7 +29,4 @@ def calculations():
         currency.energy.subAmount(currency.matter.costToGen)
         currency.matter.addAmount(currency.matter.gainPerSecond)
 
-def genEnergy():
-    currency.energy.addOne()
-
 gameScreen = pg.display.set_mode((1000, 1000))
