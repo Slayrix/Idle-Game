@@ -1,5 +1,5 @@
 import pygame as pg
-import list, upgrade, game, menu
+import listClass, upgrade, game, menu
 
 pg.init()
 
@@ -40,7 +40,7 @@ class text:
                             return False
         return False
 
-textList = list.list()
+textList = listClass.list()
 
 energyText = text(["defaultMenu", "shop", "cheats"], 0, 0)
 matterText = text(["defaultMenu", "shop", "cheats"], 0, 50, [upgrade.bigBangUpgrade, "level", ">", 0])

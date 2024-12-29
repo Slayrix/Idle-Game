@@ -1,5 +1,5 @@
 import pygame as pg
-import game, upgrade, list, menu, currency
+import game, upgrade, listClass, menu, currency
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonFunctionality: list, drawConditions: list = None):
@@ -89,7 +89,7 @@ class button:
             elif self.buttonFunctionality[0] == "buyUpdrade":
                 upgrade.buyUpgrade(self.buttonFunctionality[1])
 
-buttonList = list.list()
+buttonList = listClass.list()
 
 genButton = button(["Click to gen"], ["defaultMenu"], (255, 255, 255), 150, 100, ["genCurrency", 1, currency.energy])
 shopButton = button(["Shop"], ["defaultMenu"], (255, 255, 255), 150, 150, ["changeMenu", "shop"], [upgrade.bigBangUpgrade, "level", ">", 0])
