@@ -1,6 +1,7 @@
 Created: 10/20/24
 Archived: 
 
-Restructured code to be more modular by making multiple modules and optimized button creation
+Restructured code to be more modular by making multiple modules
+Completely reworked and optimized button creation
 Fixed bug that allowed to enter shop early
 Added cheats menu (low functionality)

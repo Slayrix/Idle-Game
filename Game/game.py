@@ -7,9 +7,8 @@ def updateScreen():
     text.energyText.setText("Energy: " + str(currency.energy.amount), (255, 255, 255))
     text.matterText.setText("Matter: " + str(currency.matter.amount), (255, 255, 255))
 
-    button.genEnergyUpgradeButton.updateText("Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", 1)
-    button.genEnergyUpgradeButton.updateText(str(upgrade.genEnergyUpgrade.cost) + " Matter", 2)
-    button.matterGenUpgradeButton.updateText(str(upgrade.matterGenUpgrade.cost) + " Matter", 2)
+    for buttonVar in button.buttonList.list:
+        buttonVar.checkUpdateText()
 
     menu.displayMenu()
 
