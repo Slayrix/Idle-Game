@@ -1,5 +1,5 @@
 import pygame as pg
-import currency, text, button, upgrade, menu
+import currency, text, button, menu
 
 def updateScreen():
     gameScreen.fill((0, 0, 0))

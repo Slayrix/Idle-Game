@@ -93,7 +93,8 @@ class button:
                             return True
                         else:
                             return False
-            return False
+            else:
+                return False
     
     def buttonClicked(self):
         if self.showButton() == True:
