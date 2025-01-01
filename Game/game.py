@@ -4,11 +4,11 @@ import currency, text, button, menu
 def updateScreen():
     gameScreen.fill((0, 0, 0))
 
-    text.energyText.setText("Energy: " + str(currency.energy.amount), (255, 255, 255))
-    text.matterText.setText("Matter: " + str(currency.matter.amount), (255, 255, 255))
-
     for buttonVar in button.buttonList.list:
         buttonVar.checkUpdateText()
+    
+    for textVar in text.textList.list:
+        textVar.checkUpdateText()
 
     menu.displayMenu()
 

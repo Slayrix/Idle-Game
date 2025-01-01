@@ -56,7 +56,7 @@ class button:
 
     def checkUpdateText(self):
         if self.updateTextList == None:
-            return None
+            return
         else:
             for listElement in self.updateTextList:
                 strVar = ""

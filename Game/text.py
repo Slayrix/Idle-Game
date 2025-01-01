@@ -1,23 +1,39 @@
 import pygame as pg
-import listClass, upgrade, game, menu
+import listClass, upgrade, game, menu, currency
 
 pg.init()
 
 class text:
-    def __init__(self, activeMenuList, xPos, yPos, drawConditions: list = None):
+    def __init__(self, activeMenuList, textColor, xPos, yPos, updateTextList: list = None, drawConditions: list = None):
         self.font = pg.font.Font("arial.ttf", 30)
         self.activeMenu = activeMenuList
+        self.textColor = textColor
         self.drawConditions = drawConditions
         self.xPos = xPos
         self.yPos = yPos
         textList.list += [self]
+        self.updateTextList = updateTextList
     
-    def setText(self, text: str, textColor, backgroundColor = None):
-        self.text = self.font.render(text, True, textColor, backgroundColor)
+    def setText(self, text: str, backgroundColor = None):
+        self.text = self.font.render(text, True, self.textColor, backgroundColor)
 
     def drawText(self):
         game.gameScreen.blit(self.text, (self.xPos, self.yPos))
-
+    
+    def checkUpdateText(self):
+        if self.updateTextList == None:
+            return
+        else:
+            strVar = ""
+            for e in self.updateTextList:
+                if type(e) == list:
+                    currencyVar = e[0]
+                    if e[1] == "amount":
+                        strVar += str(currencyVar.amount)
+                else:
+                    strVar += e
+            self.setText(strVar)
+            
     def showText(self):
         for menuVar in self.activeMenu:
             if menuVar == menu.menuVar.currentMenu:
@@ -42,5 +58,5 @@ class text:
 
 textList = listClass.list()
 
-energyText = text(["defaultMenu", "shop", "cheats"], 0, 0)
-matterText = text(["defaultMenu", "shop", "cheats"], 0, 50, [upgrade.bigBangUpgrade, "level", ">", 0])
+energyText = text(["defaultMenu", "shop", "cheats"], (255, 255, 255), 0, 0, ["Energy ", [currency.energy, "amount"]])
+matterText = text(["defaultMenu", "shop", "cheats"], (255, 255, 255), 0, 50, ["Matter ", [currency.matter, "amount"]], [upgrade.bigBangUpgrade, "level", ">", 0])
