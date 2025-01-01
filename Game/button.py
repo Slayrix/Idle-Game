@@ -14,6 +14,7 @@ class button:
         self.drawConditions = drawConditions
         self.buttonFunctionality = buttonFunctionality
         self.updateTextList = updateTextList
+        self.visible = False
 
     def setButton(self, textList: list, textColor):
         self.textColor = textColor
@@ -74,30 +75,32 @@ class button:
                                 strVar += i
 
     def showButton(self):
+        showButton = False
         for menuVar in self.activeMenu:
             if menuVar == menu.menuVar.currentMenu:
                 conditions = self.drawConditions
                 if conditions == None:
-                    return True
+                    showButton = True
                 else:
-                    val = False
                     objVar = conditions[0]
                     if conditions[1] == "level":
                         if conditions[2] == "=":
                             if objVar.level == conditions[3]:
-                                val = True
+                                showButton = True
                         elif conditions[2] == ">":
                             if objVar.level > conditions[3]:
-                                val = True
-                        if val == True:
-                            return True
-                        else:
-                            return False
+                                showButton = True
             else:
-                return False
+                showButton = False
+        if showButton == True:
+            self.drawButton((92, 92, 92))
+            self.visible = True
+        else:
+            self.setXYPosition(10000, 10000)
+            self.visible = False
     
     def buttonClicked(self):
-        if self.showButton() == True:
+        if self.visible == True:
             if self.buttonFunctionality[0] == "genCurrency":
                 upgradeVar = self.buttonFunctionality[2]
                 upgradeVar.addAmount(self.buttonFunctionality[1])
