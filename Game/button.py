@@ -116,6 +116,9 @@ class button:
 
 buttonList = listClass.list()
 
+energyCheatButton = button(["Add Energy"], ["cheats"], (255, 255, 255), 50, 200, [0])
+matterCheatButton = button(["Add Matter"], ["cheats"], (255, 255, 255), 250, 200, [0])
+
 genButton = button(["Click to gen"], ["defaultMenu"], (255, 255, 255), 150, 100, ["genCurrency", 1, currency.energy])
 shopButton = button(["Shop"], ["defaultMenu"], (255, 255, 255), 150, 150, ["changeMenu", "shop"], [upgrade.bigBangUpgrade, "level", ">", 0])
 shopBackButton = button(["Back"], ["shop"], (255, 255, 255), 150, 150, ["changeMenu", "default"])
