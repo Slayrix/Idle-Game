@@ -1,5 +1,5 @@
 import pygame as pg
-import currency, text, button, menu
+import currency, text, button, menu, buttonGroup
 
 def updateScreen():
     gameScreen.fill((0, 0, 0))
@@ -9,6 +9,8 @@ def updateScreen():
     
     for textVar in text.textList.list:
         textVar.checkUpdateText()
+
+    buttonGroup.cheatsButtonGroup.showButtonGroup()
 
     menu.displayMenu()
 

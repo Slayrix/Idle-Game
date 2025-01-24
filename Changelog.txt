@@ -1,8 +1,4 @@
-Created: 10/20/24
-Archived: 1/21/25
+Created: 1/23/25
+Archived:
 
-Restructured code to be more modular by making multiple modules
-Completely reworked and optimized button creation
-Fixed bug that allowed to enter shop early
-Added cheats menu (low functionality)
-Added cheat buttons (No functionality)
+Created button group to auto group and place certain buttons
