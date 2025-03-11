@@ -5,10 +5,12 @@ class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
         pg.font.init()
         self.font = pg.font.Font("arial.ttf", 30)
-        self.lineVarList = []
+        self.textList = textList
+        self.textColor = textColor
         self.xPos = xPos
         self.yPos = yPos
-        self.setButton(textList, textColor)
+        self.setButton()
+        self.setButtonXYPosition(10000, 10000)
         self.activeMenu = activeMenuList
         buttonList.list += [self]
         self.drawConditions = drawConditions
@@ -18,14 +20,14 @@ class button:
         if buttonGroup != None:
             buttonGroup.addButtonToGroup(self)
 
-    def setButton(self, textList: list, textColor):
+    def setButton(self):
         #Creates button rect and calculates the width and height of the button
-        self.textColor = textColor
+        self.lineVarList = []
         widthList = []
         height = 0
         i = 0
-        for e in textList:
-            self.lineVarList += [self.font.render(textList[i], True, self.textColor)]
+        for e in self.textList:
+            self.lineVarList += [self.font.render(self.textList[i], True, self.textColor)]
             if i == 0:
                 self.rect = self.lineVarList[i].get_rect()
             widthList += [self.lineVarList[i].get_width()]
@@ -33,7 +35,6 @@ class button:
             i += 1
         self.rect.width = max(widthList)
         self.rect.height = height
-        self.setButtonXYPosition(10000, 10000)
 
     def setSelfXYPosition(self, xPos, yPos):
         self.xPos = xPos
@@ -60,7 +61,8 @@ class button:
                 yOffset += e.get_height()
     
     def updateText(self, text: str, line: int):
-        self.lineVarList[line] = self.font.render(text, True, self.textColor)
+        self.textList[line] = text
+        self.setButton()
 
     def checkUpdateText(self):
         #Checks to see if any of the button text needs to be updated
