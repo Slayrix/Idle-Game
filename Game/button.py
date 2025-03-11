@@ -1,5 +1,5 @@
 import pygame as pg
-import game, upgrade, listClass, menu, currency, buttonGroup
+import game, upgrade, listClass, menu, currency, buttonGroup, cheats
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
@@ -124,11 +124,18 @@ class button:
                     menu.menuVar.setCurrentMenuToCheats()
             elif self.buttonFunctionality[0] == "buyUpdrade":
                 upgrade.buyUpgrade(self.buttonFunctionality[1])
+            elif self.buttonFunctionality[0] == "cheat":
+                currencyVar = self.buttonFunctionality[1]
+                try:
+                    amount = int(cheats.cheatsTextBox.textString)
+                    currencyVar.addAmount(amount)
+                except ValueError:
+                    pass
 
 buttonList = listClass.list()
 
-energyCheatButton = button(["Add Energy"], ["cheats"], (255, 255, 255), 50, 200, buttonGroup.cheatsButtonGroup, [0])
-matterCheatButton = button(["Add Matter"], ["cheats"], (255, 255, 255), 250, 200, buttonGroup.cheatsButtonGroup, [0])
+energyCheatButton = button(["Add Energy"], ["cheats"], (255, 255, 255), 50, 200, buttonGroup.cheatsButtonGroup, ["cheat", currency.energy])
+matterCheatButton = button(["Add Matter"], ["cheats"], (255, 255, 255), 250, 200, buttonGroup.cheatsButtonGroup, ["cheat", currency.matter])
 
 genButton = button(["Click to gen"], ["defaultMenu"], (255, 255, 255), 150, 100, None, ["genCurrency", 1, currency.energy])
 shopButton = button(["Shop"], ["defaultMenu"], (255, 255, 255), 150, 150, None, ["changeMenu", "shop"], [upgrade.bigBangUpgrade, "level", ">", 0])

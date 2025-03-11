@@ -3,6 +3,7 @@ import game
 
 class textBox:
     def __init__(self, xPos, yPos):
+        pg.font.init()
         self.textString = ""
         self.xPos = xPos
         self.yPos = yPos
