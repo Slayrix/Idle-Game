@@ -9,8 +9,9 @@ def updateScreen():
     
     for textVar in text.textList.list:
         textVar.checkUpdateText()
-
-    buttonGroup.cheatsButtonGroup.showButtonGroup()
+    
+    for buttonGroupVar in buttonGroup.buttonGroupList.list:
+        buttonGroupVar.showButtonGroup()
 
     menu.displayMenu()
 

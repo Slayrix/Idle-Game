@@ -4,6 +4,7 @@ import game, upgrade, listClass, menu, currency, buttonGroup, cheats
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
         pg.font.init()
+        buttonList.list += [self]
         self.font = pg.font.Font("arial.ttf", 30)
         self.textList = textList
         self.textColor = textColor
@@ -12,7 +13,6 @@ class button:
         self.setButton()
         self.setButtonXYPosition(10000, 10000)
         self.activeMenu = activeMenuList
-        buttonList.list += [self]
         self.drawConditions = drawConditions
         self.buttonFunctionality = buttonFunctionality
         self.updateTextList = updateTextList
@@ -136,15 +136,15 @@ class button:
 
 buttonList = listClass.list()
 
-energyCheatButton = button(["Add Energy"], ["cheats"], (255, 255, 255), 50, 200, buttonGroup.cheatsButtonGroup, ["cheat", currency.energy])
-matterCheatButton = button(["Add Matter"], ["cheats"], (255, 255, 255), 250, 200, buttonGroup.cheatsButtonGroup, ["cheat", currency.matter])
+energyCheatButton = button(["Add Energy"], ["cheats"], (255, 255, 255), 0, 0, buttonGroup.cheatsButtonGroup, ["cheat", currency.energy])
+matterCheatButton = button(["Add Matter"], ["cheats"], (255, 255, 255), 0, 0, buttonGroup.cheatsButtonGroup, ["cheat", currency.matter])
 
 genButton = button(["Click to gen"], ["defaultMenu"], (255, 255, 255), 150, 100, None, ["genCurrency", 1, currency.energy])
 shopButton = button(["Shop"], ["defaultMenu"], (255, 255, 255), 150, 150, None, ["changeMenu", "shop"], [upgrade.bigBangUpgrade, "level", ">", 0])
 shopBackButton = button(["Back"], ["shop"], (255, 255, 255), 150, 150, None, ["changeMenu", "default"])
 bigBangButton = button(["Start Big Bang", str(upgrade.bigBangUpgrade.cost) + " Energy"], ["defaultMenu"], (255, 255, 255), 150, 150, None, ["buyUpdrade", upgrade.bigBangUpgrade], [upgrade.bigBangUpgrade, "level", "=", 0])
-genEnergyUpgradeButton = button(["Upgrade 1", "Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(upgrade.genEnergyUpgrade.cost) + " Matter"], ["shop"], (255, 255, 255), 150, 230, None, ["buyUpdrade", upgrade.genEnergyUpgrade], None, [[["Auto gen +", [upgrade.genEnergyUpgrade, "increaseGenPerSecondAmount"], " energy per second per upgrade"], 1], [[[upgrade.genEnergyUpgrade, "cost"], " Matter"], 2]])
-matterGenUpgradeButton = button(["Double Matter Generation", "Increases energy consumption by +10", str(upgrade.matterGenUpgrade.cost) + " Matter"], ["shop"], (255, 255, 255), 150, 350, None, ["buyUpdrade", upgrade.matterGenUpgrade], None, [[[[upgrade.matterGenUpgrade, "cost"], " Matter"], 2]])
-genEnergyUpgradeBuffButton = button(["Double Energy Generation of Upgrade 1", str(upgrade.genEnergyUpgradeBuff.cost) + " Matter"], ["shop"], (255, 255, 255), 150, 470, None, ["buyUpdrade", upgrade.genEnergyUpgradeBuff])
+genEnergyUpgradeButton = button(["Upgrade 1", "Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(upgrade.genEnergyUpgrade.cost) + " Matter"], ["shop"], (255, 255, 255), 0, 0, buttonGroup.upgradeButtonGroup, ["buyUpdrade", upgrade.genEnergyUpgrade], None, [[["Auto gen +", [upgrade.genEnergyUpgrade, "increaseGenPerSecondAmount"], " energy per second per upgrade"], 1], [[[upgrade.genEnergyUpgrade, "cost"], " Matter"], 2]])
+matterGenUpgradeButton = button(["Double Matter Generation", "Increases energy consumption by +10", str(upgrade.matterGenUpgrade.cost) + " Matter"], ["shop"], (255, 255, 255), 0, 0, buttonGroup.upgradeButtonGroup, ["buyUpdrade", upgrade.matterGenUpgrade], None, [[[[upgrade.matterGenUpgrade, "cost"], " Matter"], 2]])
+genEnergyUpgradeBuffButton = button(["Double Energy Generation of Upgrade 1", str(upgrade.genEnergyUpgradeBuff.cost) + " Matter"], ["shop"], (255, 255, 255), 0, 0, buttonGroup.upgradeButtonGroup, ["buyUpdrade", upgrade.genEnergyUpgradeBuff])
 cheatsMenuButton = button(["Open Cheats Menu"], ["defaultMenu"], (255, 255, 255), 100, 300, None, ["changeMenu", "cheats"])
 cheatsBackButton = button(["Go Back"], ["cheats"], (255, 255, 255), 100, 300, None, ["changeMenu", "default"])
