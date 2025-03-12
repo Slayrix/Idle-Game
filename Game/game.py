@@ -1,16 +1,16 @@
 import pygame as pg
-import currency, text, button, menu, buttonGroup
+import currency, listVars, listVars, menu, buttonGroup
 
 def updateScreen():
     gameScreen.fill((0, 0, 0))
 
-    for buttonVar in button.buttonList.list:
+    for buttonVar in listVars.buttonList.list:
         buttonVar.checkUpdateText()
     
-    for textVar in text.textList.list:
+    for textVar in listVars.textList.list:
         textVar.checkUpdateText()
     
-    for buttonGroupVar in buttonGroup.buttonGroupList.list:
+    for buttonGroupVar in listVars.buttonGroupList.list:
         buttonGroupVar.showButtonGroup()
 
     menu.displayMenu()

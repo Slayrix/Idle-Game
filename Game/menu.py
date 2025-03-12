@@ -1,4 +1,4 @@
-import text, button, cheats
+import listVars, cheats
 
 class menu:
     def __init__(self):
@@ -14,10 +14,10 @@ class menu:
         self.currentMenu = "cheats"
 
 def displayMenu():
-    for buttonVar in button.buttonList.list:
+    for buttonVar in listVars.buttonList.list:
         buttonVar.showButton()
     
-    for textVar in text.textList.list:
+    for textVar in listVars.textList.list:
         if textVar.showText() == True:
             textVar.drawText()
 

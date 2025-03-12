@@ -1,5 +1,5 @@
 import pygame as pg
-import listClass, upgrade, game, menu, currency
+import upgrade, game, menu, currency, listVars
 
 pg.init()
 
@@ -11,7 +11,7 @@ class text:
         self.drawConditions = drawConditions
         self.xPos = xPos
         self.yPos = yPos
-        textList.list += [self]
+        listVars.textList.list += [self]
         self.updateTextList = updateTextList
     
     def setText(self, text: str, backgroundColor = None):
@@ -55,8 +55,6 @@ class text:
                         else:
                             return False
         return False
-
-textList = listClass.list()
 
 energyText = text(["defaultMenu", "shop", "cheats"], (255, 255, 255), 0, 0, ["Energy ", [currency.energy, "amount"]])
 matterText = text(["defaultMenu", "shop", "cheats"], (255, 255, 255), 0, 50, ["Matter ", [currency.matter, "amount"]], [upgrade.bigBangUpgrade, "level", ">", 0])

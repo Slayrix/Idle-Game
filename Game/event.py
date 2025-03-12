@@ -1,5 +1,5 @@
 import pygame as pg
-import menu, button, cheats
+import menu, cheats, listVars
 
 def eventCheck(running):
     for event in pg.event.get():
@@ -18,17 +18,15 @@ def mouseClickCheck(event):
         checkIfButtonClicked(event)
         
 def checkIfButtonClicked(event):
-    for buttonVar in button.buttonList.list:
+    for buttonVar in listVars.buttonList.list:
         if buttonVar.rect.collidepoint(event.pos):
             buttonVar.buttonClicked()
-
+    
     if menu.menuVar.currentMenu == "cheats":
         if cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
             cheats.cheatsTextBox.setSelected(True)
         elif not cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
             cheats.cheatsTextBox.setSelected(False)
-        if button.cheatsBackButton.rect.collidepoint(event.pos):
-            menu.menuVar.setCurrentMenuToDefaultMenu()
 
 def checkIfKeyPressed(event):
     shiftPressed = checkIfShiftPressed()

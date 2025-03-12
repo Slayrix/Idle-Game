@@ -1,5 +1,5 @@
 import pygame as pg
-import time, asyncio, game, event
+import time, asyncio, game, event, text, buttonVars #Keep the text and buttonVars it is needed
   
 async def gameLoop():
     tick = 0
@@ -10,6 +10,5 @@ async def gameLoop():
         tick = game.gameTick(tick)
         time.sleep(.01)
         await asyncio.sleep(0)
-
 asyncio.run(gameLoop())
 pg.quit()
