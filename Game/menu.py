@@ -1,4 +1,4 @@
-import listVars, cheats
+import vars.listVars as listVars, vars.textBoxVars as textBoxVars
 
 class menu:
     def __init__(self):
@@ -22,6 +22,6 @@ def displayMenu():
             textVar.drawText()
 
     if menuVar.currentMenu == "cheats":
-        cheats.cheatsTextBox.drawTextBox()
+        textBoxVars.cheatsTextBox.drawTextBox()
 
 menuVar = menu()

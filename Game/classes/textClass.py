@@ -1,5 +1,4 @@
-import pygame as pg
-import upgrade, game, menu, currency, listVars
+import pygame as pg, game, menu, vars.listVars as listVars
 
 pg.init()
 
@@ -55,6 +54,3 @@ class text:
                         else:
                             return False
         return False
-
-energyText = text(["defaultMenu", "shop", "cheats"], (255, 255, 255), 0, 0, ["Energy ", [currency.energy, "amount"]])
-matterText = text(["defaultMenu", "shop", "cheats"], (255, 255, 255), 0, 50, ["Matter ", [currency.matter, "amount"]], [upgrade.bigBangUpgrade, "level", ">", 0])

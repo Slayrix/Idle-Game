@@ -1,5 +1,4 @@
-import pygame as pg
-import game, menu, math, listVars
+import pygame as pg, game, menu, math, vars.listVars as listVars
 
 class buttonGroup:
     def __init__(self, activeMenu: list, xPos, yPos, width, height):
@@ -82,6 +81,3 @@ class buttonGroup:
             pos = newButtonPosList[i]
             button.setSelfXYPosition(pos[0], pos[1])
             i += 1
-
-cheatsButtonGroup = buttonGroup(["cheats"], 50, 370, 900, 500)
-upgradeButtonGroup = buttonGroup(["shop"], 50, 370, 900, 500)

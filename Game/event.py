@@ -1,5 +1,4 @@
-import pygame as pg
-import menu, cheats, listVars
+import pygame as pg, menu, vars.listVars as listVars, vars.textBoxVars as textBoxVars
 
 def eventCheck(running):
     for event in pg.event.get():
@@ -23,10 +22,10 @@ def checkIfButtonClicked(event):
             buttonVar.buttonClicked()
     
     if menu.menuVar.currentMenu == "cheats":
-        if cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
-            cheats.cheatsTextBox.setSelected(True)
-        elif not cheats.cheatsTextBox.textBoxRect.collidepoint(event.pos):
-            cheats.cheatsTextBox.setSelected(False)
+        if textBoxVars.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+            textBoxVars.cheatsTextBox.setSelected(True)
+        elif not textBoxVars.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+            textBoxVars.cheatsTextBox.setSelected(False)
 
 def checkIfKeyPressed(event):
     shiftPressed = checkIfShiftPressed()
@@ -35,14 +34,14 @@ def checkIfKeyPressed(event):
             subAmount = 32
         else:
             subAmount = 0
-        if cheats.cheatsTextBox.selected == True:
-            cheats.cheatsTextBox.addTextToTextBox(chr(event.key - subAmount))
+        if textBoxVars.cheatsTextBox.selected == True:
+            textBoxVars.cheatsTextBox.addTextToTextBox(chr(event.key - subAmount))
     elif event.type == pg.KEYDOWN and event.key >= 48 and event.key <= 57:
-        if cheats.cheatsTextBox.selected == True:
-            cheats.cheatsTextBox.addTextToTextBox(chr(event.key))
+        if textBoxVars.cheatsTextBox.selected == True:
+            textBoxVars.cheatsTextBox.addTextToTextBox(chr(event.key))
     if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
-        if cheats.cheatsTextBox.selected == True:
-            cheats.cheatsTextBox.delTextFromTextBox()
+        if textBoxVars.cheatsTextBox.selected == True:
+            textBoxVars.cheatsTextBox.delTextFromTextBox()
 
 def checkIfShiftPressed():
     pressedKeys = pg.key.get_pressed()

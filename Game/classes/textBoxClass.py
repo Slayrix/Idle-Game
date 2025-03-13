@@ -1,5 +1,4 @@
-import pygame as pg
-import game
+import pygame as pg, game
 
 class textBox:
     def __init__(self, xPos, yPos):
@@ -43,5 +42,3 @@ class textBox:
         if len(self.textString) > 0:
             self.textString = self.textString[0:len(self.textString) - 1]
             self.text = self.font.render(self.textString, True, (0, 0, 0))
-
-cheatsTextBox = textBox(400, 100)

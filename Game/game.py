@@ -1,5 +1,4 @@
-import pygame as pg
-import currency, listVars, listVars, menu, buttonGroup
+import pygame as pg, vars.currencyVars as currencyVars, vars.listVars as listVars, menu
 
 def updateScreen():
     gameScreen.fill((0, 0, 0))
@@ -25,10 +24,10 @@ def gameTick(tick):
     return tick
 
 def calculations():
-    currency.energy.addAmount(currency.energy.gainPerSecond)
+    currencyVars.energy.addAmount(currencyVars.energy.gainPerSecond)
 
-    if currency.energy.amount >= currency.matter.costToGen:
-        currency.energy.subAmount(currency.matter.costToGen)
-        currency.matter.addAmount(currency.matter.gainPerSecond)
+    if currencyVars.energy.amount >= currencyVars.matter.costToGen:
+        currencyVars.energy.subAmount(currencyVars.matter.costToGen)
+        currencyVars.matter.addAmount(currencyVars.matter.gainPerSecond)
 
 gameScreen = pg.display.set_mode((1000, 1000))

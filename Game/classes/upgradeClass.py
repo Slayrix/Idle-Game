@@ -1,5 +1,3 @@
-import currency
-
 class upgrade:
     def __init__(self, cost, currencyCost, growthRate = 0):
         self.cost = cost
@@ -46,9 +44,3 @@ def buyUpgrade(upgrade):
                 else:
                     upgrade.upgradeBuffed.increaseGenPerSecondCurrency.addGainPerSecond(upgrade.upgradeBuffed.level*upgrade.buffedAmount)
                     upgrade.upgradeBuffed.increaseGenPerSecondAmount += upgrade.buffedAmount
-
-bigBangUpgrade = genUpgrade(10, currency.energy, 0, currency.matter, .01, currency.matter, 10)
-genEnergyUpgrade = genUpgrade(.05, currency.matter, .1, currency.energy, 1)
-matterGenUpgrade = genUpgrade(.15, currency.matter, 6, currency.matter, "double", currency.matter, 10)
-
-genEnergyUpgradeBuff = upgradeBuff(.5, currency.matter, genEnergyUpgrade, "increaseGenPerSecondAmount", "double")

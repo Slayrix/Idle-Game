@@ -18,6 +18,3 @@ class currency:
 
     def addCostToGen(self, x):
         self.costToGen += x
-
-energy = currency()
-matter = currency()
