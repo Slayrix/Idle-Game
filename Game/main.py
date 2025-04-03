@@ -1,4 +1,7 @@
-import pygame as pg, time, asyncio, game, event, vars.textVars, vars.buttonVars #Keep the textVars and buttonVars it is needed
+import pygame as pg, time, asyncio, game, event
+
+#importing buttons and text (important)
+import vars.textVars, vars.buttonVars.menuButtonVars, vars.buttonVars.cheatButtonVars, vars.buttonVars.upgradeButtonVars
   
 async def gameLoop():
     tick = 0

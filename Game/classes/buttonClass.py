@@ -1,7 +1,7 @@
 import pygame as pg, game, classes.upgradeClass as upgradeClass, menu, vars.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, vars.textBoxVars as textBoxVars
 
 class button:
-    def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
+    def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass.buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
         pg.font.init()
         listVars.buttonList.list += [self]
         self.font = pg.font.Font("arial.ttf", 30)

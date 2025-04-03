@@ -1,0 +1,8 @@
+#buttonName
+textList = []
+activeMenuList = []
+buttonGroup = None
+buttonFunctionality = []
+drawConditionsList = None
+updateTextList = None
+buttonName = buttonClass.button(textList, activeMenuList, (255, 255, 255), 0, 0, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
