@@ -65,24 +65,21 @@ class button:
 
     def checkUpdateText(self):
         #Checks to see if any of the button text needs to be updated
-        if self.updateTextList == None:
-            return
-        else:
-            for listElement in self.updateTextList:
+        if self.updateTextList != None:
+            for lineList in self.updateTextList:
                 strVar = ""
-                for element in listElement:
+                for element in lineList:
                     if type(element) == int:
                         self.updateText(strVar, element)
                     else:
                         for i in element:
                             if type(i) == list:
-                                upgradeVar = i[0]
-                                if i[1] == "increaseGenPerSecondAmount":
-                                    strVar += str(upgradeVar.increaseGenPerSecondAmount)
-                                elif i[1] == "cost":
-                                    strVar += str(upgradeVar.cost)
+                                objVar = i[0]
+                                strVar += str(getattr(objVar, i[1]))
                             else:
                                 strVar += i
+        else:
+            return
 
     def showButton(self):
         #Checks to see if the button should be drawn
