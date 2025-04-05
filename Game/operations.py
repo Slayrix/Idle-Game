@@ -12,8 +12,3 @@ ops = {
     "=": op.eq,
     "!=": op.ne
 }
-
-list = [1, "<=", 0]
-
-result = ops[list[1]](list[0],list[2])
-print(result)

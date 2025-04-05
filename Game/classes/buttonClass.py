@@ -1,4 +1,4 @@
-import pygame as pg, game, classes.upgradeClass as upgradeClass, menu, vars.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, vars.textBoxVars as textBoxVars
+import pygame as pg, game, classes.upgradeClass as upgradeClass, menu, vars.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, vars.textBoxVars as textBoxVars, operations as op
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass.buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
@@ -87,17 +87,13 @@ class button:
         for menuVar in self.activeMenu:
             if menuVar == menu.menuVar.currentMenu:
                 conditions = self.drawConditions
-                if conditions == None:
-                    showButton = True
-                else:
+                if conditions != None:
                     objVar = conditions[0]
-                    if conditions[1] == "level":
-                        if conditions[2] == "=":
-                            if objVar.level == conditions[3]:
-                                showButton = True
-                        elif conditions[2] == ">":
-                            if objVar.level > conditions[3]:
-                                showButton = True
+                    attrVal = getattr(objVar, conditions[1])
+                    if op.ops[conditions[2]](attrVal, conditions[3]) == True:
+                        showButton = True
+                else:
+                    showButton = True
             else:
                 showButton = False
         if showButton == True:
