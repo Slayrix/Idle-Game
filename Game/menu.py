@@ -18,8 +18,7 @@ def displayMenu():
         buttonVar.showButton()
     
     for textVar in listVars.textList.list:
-        if textVar.showText() == True:
-            textVar.drawText()
+        textVar.showText()
 
     if menuVar.currentMenu == "cheats":
         textBoxVars.cheatsTextBox.drawTextBox()

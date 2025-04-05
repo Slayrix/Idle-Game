@@ -1,4 +1,4 @@
-import pygame as pg, game, menu, vars.listVars as listVars
+import pygame as pg, game, menu, vars.listVars as listVars, operations as op
 
 pg.init()
 
@@ -20,37 +20,24 @@ class text:
         game.gameScreen.blit(self.text, (self.xPos, self.yPos))
     
     def checkUpdateText(self):
-        if self.updateTextList == None:
-            return
-        else:
-            strVar = ""
-            for e in self.updateTextList:
-                if type(e) == list:
-                    currencyVar = e[0]
-                    if e[1] == "amount":
-                        strVar += str(currencyVar.amount)
+        strVar = ""
+        if self.updateTextList != None:
+            for i in self.updateTextList:
+                if type(i) == list:
+                    objVar = i[0]
+                    strVar += str(getattr(objVar, i[1]))
                 else:
-                    strVar += e
+                    strVar += i
             self.setText(strVar)
             
     def showText(self):
         for menuVar in self.activeMenu:
             if menuVar == menu.menuVar.currentMenu:
                 conditions = self.drawConditions
-                if conditions == None:
-                    return True
-                else:
-                    val = False
+                if conditions != None:
                     objVar = conditions[0]
-                    if conditions[1] == "level":
-                        if conditions[2] == "=":
-                            if objVar.level == conditions[3]:
-                                val = True
-                        elif conditions[2] == ">":
-                            if objVar.level > conditions[3]:
-                                val = True
-                        if val == True:
-                            return True
-                        else:
-                            return False
-        return False
+                    attrVal = getattr(objVar, conditions[1])
+                    if op.ops[conditions[2]](attrVal, conditions[3]) == True:
+                        self.drawText()
+                else:
+                    self.drawText()
