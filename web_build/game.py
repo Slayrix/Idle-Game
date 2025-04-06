@@ -1,15 +1,16 @@
-import pygame as pg
-import currency, text, button, upgrade, menu
+import pygame as pg, vars.currencyVars as currencyVars, vars.listVars as listVars, menu
 
 def updateScreen():
     gameScreen.fill((0, 0, 0))
 
-    text.energyText.setText("Energy: " + str(currency.energy.amount), (255, 255, 255))
-    text.matterText.setText("Matter: "+ str(currency.matter.amount), (255, 255, 255))
-
-    button.genEnergyUpgradeButton.updateText("Auto gen +" + str(upgrade.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", 1)
-    button.genEnergyUpgradeButton.updateText(str(upgrade.genEnergyUpgrade.cost) + " Matter", 2)
-    button.matterGenUpgradeButton.updateText(str(upgrade.matterGenUpgrade.cost) + " Matter", 2)
+    for buttonVar in listVars.buttonList.list:
+        buttonVar.checkUpdateText()
+    
+    for textVar in listVars.textList.list:
+        textVar.checkUpdateText()
+    
+    for buttonGroupVar in listVars.buttonGroupList.list:
+        buttonGroupVar.showButtonGroup()
 
     menu.displayMenu()
 
@@ -23,13 +24,10 @@ def gameTick(tick):
     return tick
 
 def calculations():
-    currency.energy.addAmount(currency.energy.gainPerSecond)
+    currencyVars.energy.addAmount(currencyVars.energy.gainPerSecond)
 
-    if currency.energy.amount >= currency.matter.costToGen:
-        currency.energy.subAmount(currency.matter.costToGen)
-        currency.matter.addAmount(currency.matter.gainPerSecond)
-
-def genEnergy():
-    currency.energy.addOne()
+    if currencyVars.energy.amount >= currencyVars.matter.costToGen:
+        currencyVars.energy.subAmount(currencyVars.matter.costToGen)
+        currencyVars.matter.addAmount(currencyVars.matter.gainPerSecond)
 
 gameScreen = pg.display.set_mode((1000, 1000))

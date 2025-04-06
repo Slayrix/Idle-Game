@@ -1,10 +1,10 @@
-import pygame as pg
-import menu, upgrade, button, game
+import pygame as pg, menu, vars.listVars as listVars, vars.textBoxVars as textBoxVars
 
 def eventCheck(running):
     for event in pg.event.get():
         running = checkIfQuit(event, running)
-        mouseClickCheck(event)    
+        mouseClickCheck(event)
+        checkIfKeyPressed(event)
     return running
 
 def checkIfQuit(event, running):
@@ -17,25 +17,36 @@ def mouseClickCheck(event):
         checkIfButtonClicked(event)
         
 def checkIfButtonClicked(event):
-    if menu.menuVar.currentMenu == "defaultMenu":
-        if button.shopButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level >= 1:
-            menu.menuVar.setCurrentMenuToShop()
-
-        if button.genButton.rect.collidepoint(event.pos):
-            game.genEnergy()
+    for buttonVar in listVars.buttonList.list:
+        if buttonVar.rect.collidepoint(event.pos):
+            buttonVar.buttonClicked()
     
-        if button.bigBangButton.rect.collidepoint(event.pos) and upgrade.bigBangUpgrade.level <= 0:
-            upgrade.buyUpgrade(upgrade.bigBangUpgrade)
+    if menu.menuVar.currentMenu == "cheats":
+        if textBoxVars.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+            textBoxVars.cheatsTextBox.setSelected(True)
+        elif not textBoxVars.cheatsTextBox.textBoxRect.collidepoint(event.pos):
+            textBoxVars.cheatsTextBox.setSelected(False)
 
-    if menu.menuVar.currentMenu == "shop":
-        if button.genEnergyUpgradeButton.rect.collidepoint(event.pos):
-            upgrade.buyUpgrade(upgrade.genEnergyUpgrade)
-    
-        if button.matterGenUpgradeButton.rect.collidepoint(event.pos):
-            upgrade.buyUpgrade(upgrade.matterGenUpgrade)
+def checkIfKeyPressed(event):
+    shiftPressed = checkIfShiftPressed()
+    if event.type == pg.KEYDOWN and event.key >= 97 and event.key <= 122:
+        if shiftPressed == True:
+            subAmount = 32
+        else:
+            subAmount = 0
+        if textBoxVars.cheatsTextBox.selected == True:
+            textBoxVars.cheatsTextBox.addTextToTextBox(chr(event.key - subAmount))
+    elif event.type == pg.KEYDOWN and event.key >= 48 and event.key <= 57:
+        if textBoxVars.cheatsTextBox.selected == True:
+            textBoxVars.cheatsTextBox.addTextToTextBox(chr(event.key))
+    if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
+        if textBoxVars.cheatsTextBox.selected == True:
+            textBoxVars.cheatsTextBox.delTextFromTextBox()
 
-        if button.genEnergyUpgradeBuffButton.rect.collidepoint(event.pos):
-            upgrade.buyUpgradeBuff(upgrade.genEnergyUpgradeBuff)
-    
-        if button.shopBackButton.rect.collidepoint(event.pos):
-            menu.menuVar.setCurrentMenuToDefaultMenu()
+def checkIfShiftPressed():
+    pressedKeys = pg.key.get_pressed()
+    if pressedKeys[pg.K_LSHIFT]:
+        shiftPressed = True
+    else:
+        shiftPressed = False
+    return shiftPressed
