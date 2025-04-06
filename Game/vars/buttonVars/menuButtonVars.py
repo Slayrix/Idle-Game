@@ -4,7 +4,7 @@ import classes.buttonClass as buttonClass, vars.currencyVars as currencyVars, va
 textList = ["Click to gen"]
 activeMenuList = ["defaultMenu"]
 buttonGroup = None
-buttonFunctionality = ["genCurrency", 1, currencyVars.energy]
+buttonFunctionality = ["genCurrency", currencyVars.energy, 1]
 drawConditionsList = None
 updateTextList = None
 genButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 150, 100, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)

@@ -1,4 +1,4 @@
-import pygame as pg, game, classes.upgradeClass as upgradeClass, menu, vars.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, vars.textBoxVars as textBoxVars, operations as op
+import pygame as pg, game, classes.upgradeClass as upgradeClass, menu, vars.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, vars.textBoxVars as textBoxVars, operations as op, buttonFunctionality
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass.buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
@@ -106,22 +106,6 @@ class button:
     def buttonClicked(self):
         #Functionality of the buttons
         if self.visible == True:
-            if self.buttonFunctionality[0] == "genCurrency":
-                upgradeVar = self.buttonFunctionality[2]
-                upgradeVar.addAmount(self.buttonFunctionality[1])
-            elif self.buttonFunctionality[0] == "changeMenu":
-                if self.buttonFunctionality[1] == "default":
-                    menu.menuVar.setCurrentMenuToDefaultMenu()
-                elif self.buttonFunctionality[1] == "shop":
-                    menu.menuVar.setCurrentMenuToShop()
-                elif self.buttonFunctionality[1] == "cheats":
-                    menu.menuVar.setCurrentMenuToCheats()
-            elif self.buttonFunctionality[0] == "buyUpdrade":
-                upgradeClass.buyUpgrade(self.buttonFunctionality[1])
-            elif self.buttonFunctionality[0] == "cheat":
-                currencyVar = self.buttonFunctionality[1]
-                try:
-                    amount = int(textBoxVars.cheatsTextBox.textString)
-                    currencyVar.addAmount(amount)
-                except ValueError:
-                    pass
+            buttonFunction = self.buttonFunctionality[0]
+            buttonFunctionVars = self.buttonFunctionality[1:]
+            buttonFunctionality.buttonFunctionality[buttonFunction](buttonFunctionVars)
