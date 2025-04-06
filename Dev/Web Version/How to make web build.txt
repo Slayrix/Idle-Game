@@ -1,0 +1,4 @@
+Paste game files into web_build
+Run pygbag build.bat
+Copy the three files from web_build\build\web
+Upload files to github
