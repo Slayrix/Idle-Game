@@ -1,4 +1,4 @@
-import vars.listVars as listVars, vars.textBoxVars as textBoxVars
+import core.vars.listVars as listVars
 
 class menu:
     def __init__(self):
@@ -20,7 +20,9 @@ def displayMenu():
     for textVar in listVars.textList.list:
         textVar.showText()
 
-    if menuVar.currentMenu == "cheats":
-        textBoxVars.cheatsTextBox.drawTextBox()
+    for object in listVars.objectList.list:
+        if object[1] == "textBox":
+            textBoxVar = object[0]
+            textBoxVar.drawTextBoxCheck()
 
 menuVar = menu()

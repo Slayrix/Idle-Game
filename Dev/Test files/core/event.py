@@ -1,4 +1,4 @@
-import chars, pygame as pg, vars.listVars as listVars
+import pygame as pg, core.chars as chars, core.vars.listVars as listVars
 
 def eventCheck(running):
     for event in pg.event.get():
