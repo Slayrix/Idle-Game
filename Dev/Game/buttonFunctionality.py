@@ -1,4 +1,4 @@
-import menu, classes.upgradeClass as upgradeClass, vars.textBoxVars as textBoxVars
+import core.menu as menu, classes.upgradeClass as upgradeClass, vars.textBoxVars as textBoxVars
 
 def genCurrency(functionVars):
     currencyVar = functionVars[0]

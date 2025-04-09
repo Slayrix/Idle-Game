@@ -1,4 +1,4 @@
-import pygame as pg, game, vars.listVars as listVars, menu
+import pygame as pg, core.game as game, core.listVars as listVars, core.menu as menu
 
 class textBox:
     def __init__(self, xPos, yPos):

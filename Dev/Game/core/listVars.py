@@ -1,4 +1,4 @@
-import classes.listClass as listClass
+import core.listClass as listClass
 
 textList = listClass.list()
 buttonList = listClass.list()

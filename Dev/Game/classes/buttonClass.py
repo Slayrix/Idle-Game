@@ -1,4 +1,4 @@
-import pygame as pg, game, menu, vars.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, operations as op, buttonFunctionality
+import pygame as pg, core.game as game, core.menu as menu, core.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, operations as op, buttonFunctionality
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass.buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):

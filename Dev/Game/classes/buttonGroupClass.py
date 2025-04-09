@@ -1,4 +1,4 @@
-import pygame as pg, game, menu, math, vars.listVars as listVars
+import pygame as pg, core.game as game, core.menu as menu, math, core.listVars as listVars
 
 class buttonGroup:
     def __init__(self, activeMenu: list, xPos, yPos, width, height):

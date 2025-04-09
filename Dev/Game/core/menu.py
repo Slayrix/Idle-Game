@@ -1,4 +1,4 @@
-import vars.listVars as listVars
+import core.listVars as listVars
 
 class menu:
     def __init__(self):
