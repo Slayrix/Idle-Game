@@ -1,4 +1,4 @@
-import pygame as pg, core.vars.listVars as listVars, core.menu as menu
+import pygame as pg, core.listVars as listVars, core.menu as menu
 
 def updateScreen():
     gameScreen.fill((0, 0, 0))

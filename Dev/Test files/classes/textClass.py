@@ -1,4 +1,4 @@
-import pygame as pg, core.game as game, core.menu as menu, core.vars.listVars as listVars, operations as op
+import pygame as pg, core.game as game, core.menu as menu, core.listVars as listVars, operations as op
 
 pg.init()
 

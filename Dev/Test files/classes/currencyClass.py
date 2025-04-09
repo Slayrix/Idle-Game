@@ -1,4 +1,4 @@
-import core.vars.listVars as listVars
+import core.listVars as listVars
 
 class currency:
     def __init__(self, currencyVarCostToGen = None):
