@@ -1,8 +1,12 @@
+import vars.listVars as listVars
+
 class currency:
-    def __init__(self):
+    def __init__(self, currencyVarCostToGen = None):
+        listVars.currencyList.list += [self]
         self.amount = 0
         self.gainPerSecond = 0
         self.costToGen = 0
+        self.currencyVarCostToGen = currencyVarCostToGen
 
     def addOne(self):
         self.amount += 1
@@ -18,3 +22,12 @@ class currency:
 
     def addCostToGen(self, x):
         self.costToGen += x
+
+    def genFunction(self):
+        if self.currencyVarCostToGen != None:
+            if self.currencyVarCostToGen.amount >= self.costToGen:
+                self.addAmount(self.gainPerSecond)
+                self.currencyVarCostToGen.subAmount(self.costToGen)
+        else:
+            self.addAmount(self.gainPerSecond)
+
