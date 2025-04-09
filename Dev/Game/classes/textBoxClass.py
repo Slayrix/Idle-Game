@@ -73,3 +73,7 @@ class textBox:
                 self.setSelected(True)
             elif not self.textBoxRect.collidepoint(event.pos):
                 self.setSelected(False)
+    
+    def drawTextBoxCheck(self):
+        if menu.menuVar.currentMenu == "cheats":
+            self.drawTextBox()
