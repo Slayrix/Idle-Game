@@ -1,8 +1,9 @@
-import pygame as pg, game
+import pygame as pg, game, vars.listVars as listVars
 
 class textBox:
     def __init__(self, xPos, yPos):
         pg.font.init()
+        listVars.objectList.list += [[self, "textBox"]]
         self.textString = ""
         self.xPos = xPos
         self.yPos = yPos

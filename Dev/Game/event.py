@@ -32,16 +32,35 @@ def checkIfKeyPressed(event):
     checkAlphabetList = checkIfletterPressed(event)
     checkNumList = checkIfNumPressed(event)
     if checkAlphabetList != False:
-        if shiftPressed == True:
-            checkAlphabetList[1] = checkAlphabetList[1].upper()
-        if textBoxVars.cheatsTextBox.selected == True:
-            textBoxVars.cheatsTextBox.addTextToTextBox(checkAlphabetList[1])
+        textBoxLetterPressed(shiftPressed, checkAlphabetList)
     if checkNumList != False:
-        if textBoxVars.cheatsTextBox.selected == True:
-            textBoxVars.cheatsTextBox.addTextToTextBox(checkNumList[1])
-    if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
-        if textBoxVars.cheatsTextBox.selected == True:
-            textBoxVars.cheatsTextBox.delTextFromTextBox()
+        textBoxNumPressed(checkNumList)
+    if checkIfBackspacePressed(event) == True:
+        textBoxDelChar()
+
+def textBoxLetterPressed(shiftPressed, checkAlphabetList):
+    if shiftPressed == True:
+        checkAlphabetList[1] = checkAlphabetList[1].upper()
+    for object in listVars.objectList.list:
+        if object[1] == "textBox":
+            textBoxVar = object[0]
+            if textBoxVar.selected == True:
+                textBoxVar.addTextToTextBox(checkAlphabetList[1])
+
+def textBoxNumPressed(checkNumList):
+    for object in listVars.objectList.list:
+        if object[1] == "textBox":
+            textBoxVar = object[0]
+            if textBoxVar.selected == True:
+                textBoxVar.addTextToTextBox(checkNumList[1])
+
+def textBoxDelChar():
+    for object in listVars.objectList.list:
+        if object[1] == "textBox":
+            textBoxVar = object[0]
+            if textBoxVar.selected == True:
+                textBoxVar.delTextFromTextBox()
+
 
 def checkIfletterPressed(event):
     if event.type == pg.KEYDOWN and event.key in chars.pgAlphabet:
@@ -62,3 +81,9 @@ def checkIfShiftPressed():
     else:
         shiftPressed = False
     return shiftPressed
+
+def checkIfBackspacePressed(event):
+    if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
+        return True
+    else:
+        return False
