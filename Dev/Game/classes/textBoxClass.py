@@ -1,4 +1,4 @@
-import pygame as pg, game, vars.listVars as listVars
+import pygame as pg, game, vars.listVars as listVars, menu
 
 class textBox:
     def __init__(self, xPos, yPos):
@@ -43,3 +43,33 @@ class textBox:
         if len(self.textString) > 0:
             self.textString = self.textString[0:len(self.textString) - 1]
             self.text = self.font.render(self.textString, True, (0, 0, 0))
+    
+    def textBoxLetterPressed(self, shiftPressed, checkAlphabetList):
+        if shiftPressed == True:
+            checkAlphabetList[1] = checkAlphabetList[1].upper()
+        for object in listVars.objectList.list:
+            if object[1] == "textBox":
+                textBoxVar = object[0]
+                if textBoxVar.selected == True:
+                    textBoxVar.addTextToTextBox(checkAlphabetList[1])
+
+    def textBoxNumPressed(self, checkNumList):
+        for object in listVars.objectList.list:
+            if object[1] == "textBox":
+                textBoxVar = object[0]
+                if textBoxVar.selected == True:
+                    textBoxVar.addTextToTextBox(checkNumList[1])
+
+    def textBoxDelChar(self):
+        for object in listVars.objectList.list:
+            if object[1] == "textBox":
+                textBoxVar = object[0]
+                if textBoxVar.selected == True:
+                    textBoxVar.delTextFromTextBox()
+    
+    def textBoxSetSelected(self, event):
+        if menu.menuVar.currentMenu == "cheats":
+            if self.textBoxRect.collidepoint(event.pos):
+                self.setSelected(True)
+            elif not self.textBoxRect.collidepoint(event.pos):
+                self.setSelected(False)
