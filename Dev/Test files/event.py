@@ -1,4 +1,4 @@
-import pygame as pg, menu, vars.listVars as listVars, vars.textBoxVars as textBoxVars
+import chars, pygame as pg, vars.listVars as listVars
 
 def eventCheck(running):
     for event in pg.event.get():
@@ -20,28 +20,37 @@ def checkIfButtonClicked(event):
     for buttonVar in listVars.buttonList.list:
         if buttonVar.rect.collidepoint(event.pos):
             buttonVar.buttonClicked()
-    
-    if menu.menuVar.currentMenu == "cheats":
-        if textBoxVars.cheatsTextBox.textBoxRect.collidepoint(event.pos):
-            textBoxVars.cheatsTextBox.setSelected(True)
-        elif not textBoxVars.cheatsTextBox.textBoxRect.collidepoint(event.pos):
-            textBoxVars.cheatsTextBox.setSelected(False)
+
+    for object in listVars.objectList.list:
+        if object[1] == "textBox":
+            textBoxVar = object[0]
+            textBoxVar.textBoxSetSelected(event)
 
 def checkIfKeyPressed(event):
     shiftPressed = checkIfShiftPressed()
-    if event.type == pg.KEYDOWN and event.key >= 97 and event.key <= 122:
-        if shiftPressed == True:
-            subAmount = 32
-        else:
-            subAmount = 0
-        if textBoxVars.cheatsTextBox.selected == True:
-            textBoxVars.cheatsTextBox.addTextToTextBox(chr(event.key - subAmount))
-    elif event.type == pg.KEYDOWN and event.key >= 48 and event.key <= 57:
-        if textBoxVars.cheatsTextBox.selected == True:
-            textBoxVars.cheatsTextBox.addTextToTextBox(chr(event.key))
-    if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
-        if textBoxVars.cheatsTextBox.selected == True:
-            textBoxVars.cheatsTextBox.delTextFromTextBox()
+    checkAlphabetList = checkIfletterPressed(event)
+    checkNumList = checkIfNumPressed(event)
+    for object in listVars.objectList.list:
+        if object[1] == "textBox":
+            textBoxVar = object[0]
+            if checkAlphabetList != False:
+                textBoxVar.textBoxLetterPressed(shiftPressed, checkAlphabetList)
+            if checkNumList != False:
+                textBoxVar.textBoxNumPressed(checkNumList)
+            if checkIfBackspacePressed(event) == True:
+                textBoxVar.textBoxDelChar()
+
+def checkIfletterPressed(event):
+    if event.type == pg.KEYDOWN and event.key in chars.pgAlphabet:
+        return [True, chars.pgAlphabet[event.key]]
+    else:
+        return False
+
+def checkIfNumPressed(event):
+    if event.type == pg.KEYDOWN and event.key in chars.pgNums:
+        return [True, chars.pgNums[event.key]]
+    else:
+        return False
 
 def checkIfShiftPressed():
     pressedKeys = pg.key.get_pressed()
@@ -50,3 +59,9 @@ def checkIfShiftPressed():
     else:
         shiftPressed = False
     return shiftPressed
+
+def checkIfBackspacePressed(event):
+    if event.type == pg.KEYDOWN and event.key == pg.K_BACKSPACE:
+        return True
+    else:
+        return False
