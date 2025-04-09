@@ -1,4 +1,4 @@
-import core.menu as menu, classes.upgradeClass as upgradeClass, vars.textBoxVars as textBoxVars
+import core.menu as menu, classes.upgradeClass as upgradeClass, core.listVars as listVars
 
 def genCurrency(functionVars):
     currencyVar = functionVars[0]
@@ -19,11 +19,10 @@ def buyUpgrade(functionVars):
 
 def cheat(functionVars):
     currencyVar = functionVars[0]
-    try:
-        amount = int(textBoxVars.cheatsTextBox.textString)
-        currencyVar.addAmount(amount)
-    except ValueError:
-        pass
+    for object in listVars.objectList.list:
+        if object[1] == "textBox":
+            textBoxVar = object[0]
+            textBoxVar.textBoxAddCurrency(currencyVar)
 
 buttonFunctionality = {
     "genCurrency": genCurrency,

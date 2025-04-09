@@ -1,1 +1,6 @@
+Improve the menu functionality
+Create tooltip that tells upgrade info when mouse is over it
+
+
+
 Make matter gen cost display
