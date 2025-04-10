@@ -6,13 +6,8 @@ def genCurrency(functionVars):
     currencyVar.addAmount(amount)
 
 def changeMenu(functionVars):
-    menuChange = functionVars[0]
-    if menuChange == "default":
-        menu.menuVar.setCurrentMenuToDefaultMenu()
-    elif menuChange == "shop":
-        menu.menuVar.setCurrentMenuToShop()
-    elif menuChange == "cheats":
-        menu.menuVar.setCurrentMenuToCheats()
+    newMenu = functionVars[0]
+    menu.menuVar.setCurrentMenu(newMenu)
 
 def buyUpgrade(functionVars):
     upgradeClass.buyUpgrade(functionVars[0])
