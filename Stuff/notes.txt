@@ -1,4 +1,3 @@
-Improve the menu functionality (changeMenu function in buttonFunctionality and also the menu.py core file)
 Create tooltip that tells upgrade info when mouse is over it
 Improve upgrade class code (buyUpgrade function)
 Improve readability of textVars and upgradeVars
