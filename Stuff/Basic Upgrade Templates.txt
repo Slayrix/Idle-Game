@@ -1,0 +1,22 @@
+Gen upgrade: 
+cost = 0
+currencyCost = currencyVars.var
+growthRate = 0
+increaseGenPerSecondCurrency = None
+operation1 = None
+increaseGenPerSecondAmount = None
+increaseCostPerGenCurrency = None
+operation2 = None
+increaseCostPerGenAmount = None
+genUpgrade = upgradeClass.genUpgrade(cost, currencyCost, growthRate, increaseGenPerSecondCurrency, operation1, increaseGenPerSecondAmount, increaseCostPerGenCurrency, operation2, increaseCostPerGenAmount)
+
+
+upgrade buff:
+cost = 0
+currencyCost = currencyVars.
+upgradeBuffed = upgradeVar
+upgradeVarBuffed = ""
+operation = ""
+amountIncrease = 0
+growthRate = 0
+upgradeBuff = upgradeClass.upgradeBuff(cost, currencyCost, upgradeBuffed, upgradeVarBuffed, operation, amountIncrease, growthRate)

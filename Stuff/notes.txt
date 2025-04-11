@@ -1,5 +1,5 @@
 Create tooltip that tells upgrade info when mouse is over it
-Improve upgrade class code (buyUpgrade function)
+
 Improve readability of textVars and upgradeVars
 
 
