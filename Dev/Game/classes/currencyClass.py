@@ -19,9 +19,15 @@ class currency:
     
     def addGainPerSecond(self, x):
         self.gainPerSecond += x
+    
+    def setGenPerSecond(self, newGenPerSecond):
+        self.gainPerSecond = newGenPerSecond
 
     def addCostToGen(self, x):
         self.costToGen += x
+    
+    def setCostToGen(self, newCostToGen):
+        self.costToGen = newCostToGen
 
     def genFunction(self):
         if self.currencyVarCostToGen != None:

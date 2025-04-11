@@ -10,7 +10,8 @@ def changeMenu(functionVars):
     menu.menuVar.setCurrentMenu(newMenu)
 
 def buyUpgrade(functionVars):
-    upgradeClass.buyUpgrade(functionVars[0])
+    upgradeVar = functionVars[0]
+    upgradeVar.buyUpgrade()
 
 def cheat(functionVars):
     currencyVar = functionVars[0]
