@@ -77,3 +77,10 @@ class textBox:
     def drawTextBoxCheck(self):
         if menu.menuVar.currentMenu == "cheats":
             self.drawTextBox()
+    
+    def textBoxAddCurrency(self, currencyVar):
+        try:
+            amount = int(self.textString)
+            currencyVar.addAmount(amount)
+        except ValueError:
+            pass
