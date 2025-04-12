@@ -1,7 +1,7 @@
 import pygame as pg, core.game as game, core.menu as menu, core.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, operations as op, buttonFunctionality
 
 class button:
-    def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass.buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None):
+    def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass.buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None, infoboxVar = None):
         pg.font.init()
         listVars.buttonList.list += [self]
         self.font = pg.font.Font("arial.ttf", 30)
@@ -11,6 +11,7 @@ class button:
         self.yPos = yPos
         self.setButton()
         self.setButtonXYPosition(10000, 10000)
+        self.infoboxVar = infoboxVar
         self.activeMenu = activeMenuList
         self.drawConditions = drawConditions
         self.buttonFunctionality = buttonFunctionality
@@ -80,6 +81,10 @@ class button:
                                 strVar += i
         else:
             return
+    
+    def checkIfMouseIsOverButton(self):
+        mousePos = pg.mouse.get_pos()
+        return self.rect.collidepoint(mousePos[0], mousePos[1])
 
     def showButton(self):
         #Checks to see if the button should be drawn
@@ -102,6 +107,12 @@ class button:
         else:
             self.setButtonXYPosition(10000, 10000)
             self.visible = False
+            
+        if self.infoboxVar != None:
+            if self.checkIfMouseIsOverButton() == True and showButton == True:
+                self.infoboxVar.showInfobox(True)
+            else:
+                self.infoboxVar.showInfobox(False)
     
     def buttonClicked(self):
         #Functionality of the buttons

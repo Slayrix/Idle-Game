@@ -1,0 +1,3 @@
+textList = []
+updateTextList = None
+infobox = infoboxClass.infobox(textList, (255, 255, 255), updateTextList)

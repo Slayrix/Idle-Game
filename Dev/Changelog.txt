@@ -1,2 +1,5 @@
 Created: 4/11/25
 Archived:
+
+Added infoboxes for upgrades
+Put all upgrade info into infoboxes

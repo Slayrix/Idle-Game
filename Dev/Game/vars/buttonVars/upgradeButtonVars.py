@@ -1,37 +1,41 @@
-import vars.upgradeVars as upgradeVars, classes.buttonClass as buttonClass, vars.buttonGroupVars as buttonGroupVars
+import vars.upgradeVars as upgradeVars, classes.buttonClass as buttonClass, vars.buttonGroupVars as buttonGroupVars, vars.infoboxVars as infoboxVars
 
 #bigBangUpgradeButton
-textList = ["Start Big Bang", str(upgradeVars.bigBangUpgrade.cost) + " Energy"]
+textList = ["Start Big Bang"]
 activeMenuList = ["defaultMenu"]
 buttonGroup = None
 buttonFunctionality = ["buyUpgrade", upgradeVars.bigBangUpgrade]
 drawConditionsList = [upgradeVars.bigBangUpgrade, "level", "=", 0]
 updateTextList = None
-bigBangUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 150, 150, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
+infobox = infoboxVars.bigBangInfobox
+bigBangUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 150, 150, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
 
 #genEnergyUpgradeButton
-textList = ["Upgrade 1", "Auto gen +" + str(upgradeVars.genEnergyUpgrade.increaseGenPerSecondAmount) + " energy per second per upgrade", str(upgradeVars.genEnergyUpgrade.cost) + " Matter"]
+textList = ["Upgrade 1"]
 activeMenuList = ["shop"]
 buttonGroup = buttonGroupVars.upgradeButtonGroup
 buttonFunctionality = ["buyUpgrade", upgradeVars.genEnergyUpgrade]
 drawConditionsList = None
-updateTextList = [["Auto gen +", [upgradeVars.genEnergyUpgrade, "increaseGenPerSecondAmount"], " energy per second per upgrade"], 1], [[[upgradeVars.genEnergyUpgrade, "cost"], " Matter"], 2]
-genEnergyUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 0, 0, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
+updateTextList = None
+infobox = infoboxVars.genEnergyUpgradeInfobox
+genEnergyUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 0, 0, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
 
 #matterGenUpgradeButton
-textList = ["Double Matter Generation", "Increases energy consumption by +10", str(upgradeVars.matterGenUpgrade.cost) + " Matter"]
+textList = ["Upgrade 2"]
 activeMenuList = ["shop"]
 buttonGroup = buttonGroupVars.upgradeButtonGroup
 buttonFunctionality = ["buyUpgrade", upgradeVars.matterGenUpgrade]
 drawConditionsList = None
-updateTextList = [[[[upgradeVars.matterGenUpgrade, "cost"], " Matter"], 2]]
-matterGenUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 0, 0, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
+updateTextList = None
+infobox = infoboxVars.matterGenUpgradeInfobox
+matterGenUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 0, 0, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
 
 #genEnergyUpgradeBuffButton
-textList = ["Double Energy Generation of Upgrade 1", str(upgradeVars.genEnergyUpgradeBuff.cost) + " Matter"]
+textList = ["Upgrade 3"]
 activeMenuList = ["shop"]
 buttonGroup = buttonGroupVars.upgradeButtonGroup
 buttonFunctionality = ["buyUpgrade", upgradeVars.genEnergyUpgradeBuff]
 drawConditionsList = None
 updateTextList = None
-genEnergyUpgradeBuffButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 0, 0, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
+infobox = infoboxVars.genEnergyUpgradeBuffInfobox
+genEnergyUpgradeBuffButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 0, 0, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)

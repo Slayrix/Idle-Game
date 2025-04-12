@@ -11,6 +11,9 @@ def displayMenu():
     for buttonVar in listVars.buttonList.list:
         buttonVar.showButton()
     
+    for infoboxVar in listVars.infoboxList.list:
+        infoboxVar.drawInfobox((92, 92, 92))
+    
     for textVar in listVars.textList.list:
         textVar.showText()
 
