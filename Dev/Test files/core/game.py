@@ -5,6 +5,9 @@ def updateScreen():
 
     for buttonVar in listVars.buttonList.list:
         buttonVar.checkUpdateText()
+
+    for infoboxVar in listVars.infoboxList.list:
+        infoboxVar.checkUpdateText()
     
     for textVar in listVars.textList.list:
         textVar.checkUpdateText()

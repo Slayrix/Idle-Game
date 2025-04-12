@@ -1,6 +1,7 @@
 import pygame as pg, time, asyncio, core.game as game, core.event as event
 
 #import vars.textVars, vars.textBoxVars, vars.buttonVars.menuButtonVars, vars.buttonVars.cheatButtonVars, vars.buttonVars.upgradeButtonVars
+import vars.infoboxVars, vars.buttonVars.testButtonVars
 
 async def gameLoop():
     tick = 0
