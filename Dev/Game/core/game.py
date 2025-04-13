@@ -30,4 +30,5 @@ def calculations():
     for currencyVar in listVars.currencyList.list:
         currencyVar.genFunction()
 
-gameScreen = pg.display.set_mode((1000, 1000))
+resolution = (1000, 1000)
+gameScreen = pg.display.set_mode(resolution)

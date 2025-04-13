@@ -64,8 +64,30 @@ class infobox:
     
     def setPosToMouseCursor(self):
         mousePos = pg.mouse.get_pos()
-        self.setInfoboxXYPosition(mousePos[0] + 10, mousePos[1] + 20)
+        infoboxPos = self.checkIfInfoboxInWindow(mousePos)
+        self.setInfoboxXYPosition(infoboxPos[0], infoboxPos[1])
+
+    def checkIfInfoboxInWindow(self, mousePos):
+        maxX = mousePos[0] + self.borderRect.width + 10
+        maxY = mousePos[1] + self.borderRect.height + 20
+        maxXInWindow = self.checkPos(maxX, game.resolution[0])
+        maxYInWindow = self.checkPos(maxY, game.resolution[1])
+        if maxXInWindow == True:
+            if maxYInWindow == True:
+                return (mousePos[0] + 10, mousePos[1] + 20)
+            else:
+                y = game.resolution[1] - self.borderRect.height
+                return (mousePos[0] + 10, y)
+        else:
+            x = game.resolution[0] - self.borderRect.width
+            return (x, mousePos[1] + 20)
     
+    def checkPos(self, pos, resolutionVal):
+        if pos < resolutionVal:
+            return True
+        else:
+            return False
+        
     def updateText(self, text: str, line: int):
         self.textList[line] = text
         self.setInfobox()
