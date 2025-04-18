@@ -1,15 +1,16 @@
-import pygame as pg, core.game as game, core.menu as menu, core.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, operations as op, buttonFunctionality
+import pygame as pg, core.game as game, core.menu as menu, core.listVars as listVars, classes.buttonGroupClass as buttonGroupClass, operations as op, buttonFunctionality, core.settings as settings
 
 class button:
     def __init__(self, textList, activeMenuList: list, textColor, xPos, yPos, buttonGroup: buttonGroupClass.buttonGroup, buttonFunctionality: list, drawConditions: list = None, updateTextList: list = None, infoboxVar = None):
         pg.font.init()
         listVars.buttonList.list += [self]
-        self.font = pg.font.Font("arial.ttf", 30)
+        self.font = pg.font.Font("arial.ttf", settings.fontSize)
         self.textList = textList
         self.textColor = textColor
-        self.xPos = xPos
-        self.yPos = yPos
+        self.refXPos = xPos
+        self.refYPos = yPos
         self.setButton()
+        self.calcXYPos()
         self.setButtonXYPosition(10000, 10000)
         self.infoboxVar = infoboxVar
         self.activeMenu = activeMenuList
@@ -19,6 +20,10 @@ class button:
         self.visible = False
         if buttonGroup != None:
             buttonGroup.addButtonToGroup(self)
+        
+    def calcXYPos(self):
+        self.xPos = (settings.resolutionScale[0] * self.refXPos) - (self.rect.width/2)
+        self.yPos = (settings.resolutionScale[1] * self.refYPos) - (self.rect.height/2)
 
     def setButton(self):
         #Creates button rect and calculates the width and height of the button
@@ -103,15 +108,16 @@ class button:
                 showButton = False
         if showButton == True:
             self.drawButton((92, 92, 92))
-            if self.infoboxVar != None:
-                if self.checkIfMouseIsOverButton() == True:
-                    self.infoboxVar.drawInfobox((92, 92, 92))
-                else:
-                    self.infoboxVar.setInfoboxXYPosition(10000, 10000)
             self.visible = True
         else:
             self.setButtonXYPosition(10000, 10000)
             self.visible = False
+            
+        if self.infoboxVar != None:
+            if self.checkIfMouseIsOverButton() == True and showButton == True:
+                self.infoboxVar.showInfobox(True)
+            else:
+                self.infoboxVar.showInfobox(False)
     
     def buttonClicked(self):
         #Functionality of the buttons

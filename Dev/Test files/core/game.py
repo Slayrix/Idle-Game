@@ -1,4 +1,4 @@
-import pygame as pg, core.listVars as listVars, core.menu as menu
+import pygame as pg, core.listVars as listVars, core.menu as menu, core.settings as settings
 
 def updateScreen():
     gameScreen.fill((0, 0, 0))
@@ -30,4 +30,4 @@ def calculations():
     for currencyVar in listVars.currencyList.list:
         currencyVar.genFunction()
 
-gameScreen = pg.display.set_mode((1000, 1000))
+gameScreen = pg.display.set_mode(settings.resolution)
