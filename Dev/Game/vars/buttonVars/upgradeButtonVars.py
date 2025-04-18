@@ -8,7 +8,7 @@ buttonFunctionality = ["buyUpgrade", upgradeVars.bigBangUpgrade]
 drawConditionsList = [upgradeVars.bigBangUpgrade, "level", "=", 0]
 updateTextList = None
 infobox = infoboxVars.bigBangInfobox
-bigBangUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 150, 150, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
+bigBangUpgradeButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 320, 200, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
 
 #genEnergyUpgradeButton
 textList = ["Upgrade 1"]

@@ -1,18 +1,28 @@
-import pygame as pg, core.game as game, core.menu as menu, math, core.listVars as listVars
+import pygame as pg, core.game as game, core.menu as menu, math, core.listVars as listVars, core.settings as settings
 
 class buttonGroup:
     def __init__(self, activeMenu: list, xPos, yPos, width, height):
         listVars.buttonGroupList.list += [self]
         self.activeMenu = activeMenu
-        self.xPos = xPos
-        self.yPos = yPos
-        self.width = width
-        self.height = height
+        self.refXPos = xPos
+        self.refYPos = yPos
+        self.refWidth = width
+        self.refHeight = height
+        self.calcXYPos()
+        self.calcWH()
         self.buttonList = []
-        self.createRect(xPos, yPos, width, height)
+        self.createRect(self.xPos, self.yPos, self.width, self.height)
     
     def addButtonToGroup(self, button):
         self.buttonList += [button]
+
+    def calcXYPos(self):
+        self.xPos = settings.resolutionScale[0] * self.refXPos
+        self.yPos = settings.resolutionScale[1] * self.refYPos
+    
+    def calcWH(self):
+        self.width = settings.resolutionScale[0] * self.refWidth
+        self.height = settings.resolutionScale[1] * self.refHeight
     
     def createRect(self, xPos, yPos, width, height):
         self.rect = pg.Rect(xPos, yPos, width, height)

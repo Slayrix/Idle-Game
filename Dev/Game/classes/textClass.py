@@ -1,17 +1,22 @@
-import pygame as pg, core.game as game, core.menu as menu, core.listVars as listVars, operations as op
+import pygame as pg, core.game as game, core.menu as menu, core.listVars as listVars, operations as op, core.settings as settings
 
 pg.init()
 
 class text:
     def __init__(self, activeMenuList, textColor, xPos, yPos, updateTextList: list = None, drawConditions: list = None):
-        self.font = pg.font.Font("arial.ttf", 30)
+        self.font = pg.font.Font("arial.ttf", settings.fontSize)
         self.activeMenu = activeMenuList
         self.textColor = textColor
         self.drawConditions = drawConditions
-        self.xPos = xPos
-        self.yPos = yPos
+        self.refXPos = xPos
+        self.refYPos = yPos
+        self.calcXYPos()
         listVars.textList.list += [self]
         self.updateTextList = updateTextList
+
+    def calcXYPos(self):
+        self.xPos = settings.resolutionScale[0] * self.refXPos
+        self.yPos = settings.resolutionScale[1] * self.refYPos
     
     def setText(self, text: str, backgroundColor = None):
         self.text = self.font.render(text, True, self.textColor, backgroundColor)

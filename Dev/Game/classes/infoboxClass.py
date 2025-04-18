@@ -1,11 +1,11 @@
-import pygame as pg, core.listVars as listVars, core.game as game
+import pygame as pg, core.listVars as listVars, core.game as game, core.settings as settings
 
 class infobox:
     def __init__(self, textList, textColor, updateTextList = None):
         pg.font.init()
         listVars.infoboxList.list += [self]
         self.draw = False
-        self.font = pg.font.Font("arial.ttf", 30)
+        self.font = pg.font.Font("arial.ttf", settings.infoboxFontSize)
         self.textList = textList
         self.textColor = textColor
         self.setInfobox()
@@ -70,16 +70,16 @@ class infobox:
     def checkIfInfoboxInWindow(self, mousePos):
         maxX = mousePos[0] + self.borderRect.width + 10
         maxY = mousePos[1] + self.borderRect.height + 20
-        maxXInWindow = self.checkPos(maxX, game.resolution[0])
-        maxYInWindow = self.checkPos(maxY, game.resolution[1])
+        maxXInWindow = self.checkPos(maxX, settings.resolution[0])
+        maxYInWindow = self.checkPos(maxY, settings.resolution[1])
         if maxXInWindow == True:
             if maxYInWindow == True:
                 return (mousePos[0] + 10, mousePos[1] + 20)
             else:
-                y = game.resolution[1] - self.borderRect.height
+                y = settings.resolution[1] - self.borderRect.height
                 return (mousePos[0] + 10, y)
         else:
-            x = game.resolution[0] - self.borderRect.width
+            x = settings.resolution[0] - self.borderRect.width
             return (x, mousePos[1] + 20)
     
     def checkPos(self, pos, resolutionVal):

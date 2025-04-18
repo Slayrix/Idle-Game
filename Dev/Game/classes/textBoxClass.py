@@ -1,28 +1,33 @@
-import pygame as pg, core.game as game, core.listVars as listVars, core.menu as menu
+import pygame as pg, core.game as game, core.listVars as listVars, core.menu as menu, core.settings as settings
 
 class textBox:
     def __init__(self, xPos, yPos):
         pg.font.init()
+        self.font = pg.font.Font("arial.ttf", settings.fontSize)
         listVars.objectList.list += [[self, "textBox"]]
         self.textString = ""
-        self.xPos = xPos
-        self.yPos = yPos
+        self.refXPos = xPos
+        self.refYPos = yPos
         self.selected = False
-        self.font = pg.font.Font("arial.ttf", 20)
         self.text = self.font.render(self.textString, True, (0, 0, 0))
 
         self.textBoxRect = self.text.get_rect()
         self.textBoxRect.height = self.text.get_height()
-        self.textBoxRect.width = 150
-        self.textBoxRect.x = xPos
-        self.textBoxRect.y = yPos
+        self.textBoxRect.width = 150 * settings.resolutionScale[0]
+        self.calcXYPos()
+        self.textBoxRect.x = self.xPos
+        self.textBoxRect.y = self.yPos
 
         self.boarderRect = pg.Rect(0, 0, 0, 0)
-        self.boarderRect.height = self.textBoxRect.height + 10
-        self.boarderRect.width = 160
-        self.boarderRect.x = xPos - 5
-        self.boarderRect.y = yPos - 5
+        self.boarderRect.height = self.textBoxRect.height + (10 * settings.resolutionScale[0])
+        self.boarderRect.width = 160 * settings.resolutionScale[0]
+        self.boarderRect.x = self.xPos - (self.boarderRect.width - self.textBoxRect.width)/2
+        self.boarderRect.y = self.yPos - (self.boarderRect.height - self.textBoxRect.height)/2
     
+    def calcXYPos(self):
+        self.xPos = (self.refXPos * settings.resolutionScale[0]) - (self.textBoxRect.width/2)
+        self.yPos = (self.refYPos * settings.resolutionScale[1]) - (self.textBoxRect.height/2)
+
     def drawTextBox(self):
         if self.selected == True:
             pg.draw.rect(game.gameScreen, (200, 200, 200), self.boarderRect)

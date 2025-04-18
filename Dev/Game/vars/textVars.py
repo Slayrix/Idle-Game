@@ -9,7 +9,7 @@ energyText = textClass.text(activeMenuList, (255, 255, 255), xPos, yPos, updateT
 
 activeMenuList = ["defaultMenu", "shop", "cheats"]
 xPos = 0
-yPos = 50
+yPos = 30
 updateTextList = ["Matter ", [currencyVars.matter, "amount"]]
 drawConditions = [upgradeVars.bigBangUpgrade, "level", ">", 0]
 matterText = textClass.text(activeMenuList, (255, 255, 255), xPos, yPos, updateTextList, drawConditions)

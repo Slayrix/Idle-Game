@@ -1,3 +1,3 @@
 import classes.textBoxClass as textBoxClass
 
-cheatsTextBox = textBoxClass.textBox(400, 100)
+cheatsTextBox = textBoxClass.textBox(320, 50)
