@@ -27,6 +27,26 @@ drawConditionsList = None
 updateTextList = None
 shopBackButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 35, 335, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
 
+#settingsButton
+textList = ["Settings"]
+activeMenuList = ["defaultMenu"]
+buttonGroup = None
+buttonFunctionality = ["changeMenu", "settings"]
+drawConditionsList = None
+updateTextList = None
+infobox = None
+settingsButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 600, 20, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
+
+#settingsBackButton
+textList = ["Back"]
+activeMenuList = ["settings"]
+buttonGroup = None
+buttonFunctionality = ["changeMenu", "defaultMenu"]
+drawConditionsList = None
+updateTextList = None
+infobox = None
+settingsBackButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 35, 335, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
+
 #cheatsMenuButton
 textList = ["Open Cheats Menu"]
 activeMenuList = ["defaultMenu"]
@@ -37,10 +57,30 @@ updateTextList = None
 cheatsMenuButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 550, 335, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
 
 #cheatsBackButton
-textList = ["Go Back"]
+textList = ["Back"]
 activeMenuList = ["cheats"]
 buttonGroup = None
 buttonFunctionality = ["changeMenu", "defaultMenu"]
 drawConditionsList = None
 updateTextList = None
-cheatsBackButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 50, 335, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
+cheatsBackButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 35, 335, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
+
+#changeResForward
+textList = [">"]
+activeMenuList = ["settings"]
+buttonGroup = None
+buttonFunctionality = ["changeResolution", "forward"]
+drawConditionsList = None
+updateTextList = None
+infobox = None
+changeResForward = buttonClass.button(textList, activeMenuList, (255, 255, 255), 400, 100, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
+
+#changeResBack
+textList = ["<"]
+activeMenuList = ["settings"]
+buttonGroup = None
+buttonFunctionality = ["changeResolution", "backward"]
+drawConditionsList = None
+updateTextList = None
+infobox = None
+changeResBack = buttonClass.button(textList, activeMenuList, (255, 255, 255), 235, 100, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)

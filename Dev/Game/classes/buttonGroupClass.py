@@ -12,6 +12,11 @@ class buttonGroup:
         self.calcWH()
         self.buttonList = []
         self.createRect(self.xPos, self.yPos, self.width, self.height)
+
+    def resizeButtonGroup(self):
+        self.calcXYPos()
+        self.calcWH()
+        self.createRect(self.xPos, self.yPos, self.width, self.height)
     
     def addButtonToGroup(self, button):
         self.buttonList += [button]

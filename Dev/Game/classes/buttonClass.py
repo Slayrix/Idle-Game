@@ -20,6 +20,11 @@ class button:
         self.visible = False
         if buttonGroup != None:
             buttonGroup.addButtonToGroup(self)
+    
+    def resizeButton(self):
+        self.font = pg.font.Font("arial.ttf", settings.fontSize)
+        self.setButton()
+        self.calcXYPos()
         
     def calcXYPos(self):
         self.xPos = (settings.resolutionScale[0] * self.refXPos) - (self.rect.width/2)

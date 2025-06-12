@@ -12,6 +12,10 @@ class infobox:
         self.setInfoboxXYPosition(10000, 10000)
         self.updateTextList = updateTextList
     
+    def resizeInfoboxFont(self):
+        self.font = pg.font.Font("arial.ttf", settings.infoboxFontSize)
+        self.setInfobox()
+    
     def setInfobox(self):
         #Creates infobox rect and calculates the width and height of the infobox
         self.lineVarList = []

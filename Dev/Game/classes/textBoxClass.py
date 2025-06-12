@@ -10,7 +10,14 @@ class textBox:
         self.refYPos = yPos
         self.selected = False
         self.text = self.font.render(self.textString, True, (0, 0, 0))
+        self.setRect()
+    
+    def resizeTextBox(self):
+        self.font = pg.font.Font("arial.ttf", settings.fontSize)
+        self.text = self.font.render(self.textString, True, (0, 0, 0))
+        self.setRect()
 
+    def setRect(self):
         self.textBoxRect = self.text.get_rect()
         self.textBoxRect.height = self.text.get_height()
         self.textBoxRect.width = 150 * settings.resolutionScale[0]
