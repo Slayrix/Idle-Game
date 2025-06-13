@@ -4,5 +4,6 @@ Archived:
 Added infoboxes for upgrades
 Put all upgrade info into infoboxes
 Reworked UI layout
-Added settings (no in game access yet)
+Added settings (limited access)
 Added font and resolution settings
+Added in game way to change resolution
