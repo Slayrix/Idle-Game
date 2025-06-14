@@ -5,7 +5,7 @@ resolutionList = [
     [2560, 1440]
 ]
 
-resolution = resolutionList[0]
+resolution = resolutionList[1]
 
 def calcResolutionScale(resolution):
     resolutionScale = [resolution[0]/640, resolution[1]/360]

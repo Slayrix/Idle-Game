@@ -1,6 +1,7 @@
 activeMenuList = []
 xPos = 0
 yPos = 0
-updateTextList = None
+updateTextList = []
 drawConditions = None
-text = textClass.text(activeMenuList, (255, 255, 255), xPos, yPos, updateTextList, drawConditions)
+textType = None
+text = textClass.text(activeMenuList, (255, 255, 255), xPos, yPos, updateTextList, drawConditions, textType)

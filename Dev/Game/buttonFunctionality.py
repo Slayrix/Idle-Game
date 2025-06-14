@@ -40,7 +40,7 @@ def changeResolution(functionVars):
     setObjsToNewResolution()
 
 def setObjsToNewResolution():
-    textVars.resolutionText.changeText([str(settings.resolution[0]), "x", str(settings.resolution[1])])
+    textVars.currentResolutionText.changeText([str(settings.resolution[0]), "x", str(settings.resolution[1])])
     for button in listVars.buttonList.list:
         button.resizeButton()
     for text in listVars.textList.list:

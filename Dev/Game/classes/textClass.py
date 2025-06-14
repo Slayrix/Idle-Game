@@ -3,7 +3,7 @@ import pygame as pg, core.game as game, core.menu as menu, core.listVars as list
 pg.init()
 
 class text:
-    def __init__(self, activeMenuList, textColor, xPos, yPos, updateTextList: list = None, drawConditions: list = None):
+    def __init__(self, activeMenuList, textColor, xPos, yPos, updateTextList: list = None, drawConditions: list = None, textType = None):
         self.font = pg.font.Font("arial.ttf", settings.fontSize)
         listVars.textList.list += [self]
         self.activeMenu = activeMenuList
@@ -11,6 +11,7 @@ class text:
         self.drawConditions = drawConditions
         self.refXPos = xPos
         self.refYPos = yPos
+        self.textType = textType
         self.updateTextList = updateTextList
         self.checkUpdateText()
         self.calcXYPos()
@@ -21,8 +22,12 @@ class text:
         self.calcXYPos()
 
     def calcXYPos(self):
-        self.xPos = (settings.resolutionScale[0] * self.refXPos) - (self.text.get_width()/2)
-        self.yPos = (settings.resolutionScale[1] * self.refYPos) - (self.text.get_height()/2)
+        if self.textType != "currency":
+            self.xPos = (settings.resolutionScale[0] * self.refXPos) - (self.text.get_width()/2)
+            self.yPos = (settings.resolutionScale[1] * self.refYPos) - (self.text.get_height()/2)
+        else:
+            self.xPos = settings.resolutionScale[0] * self.refXPos
+            self.yPos = settings.resolutionScale[1] * self.refYPos
     
     def setText(self, text: str, backgroundColor = None):
         self.text = self.font.render(text, True, self.textColor, backgroundColor)
