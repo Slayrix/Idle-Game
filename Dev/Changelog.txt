@@ -7,3 +7,4 @@ Reworked UI layout
 Added settings (limited access)
 Added font and resolution settings
 Added in game way to change resolution
+Added quit button
