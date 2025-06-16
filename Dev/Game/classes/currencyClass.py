@@ -36,4 +36,3 @@ class currency:
                 self.currencyVarCostToGen.subAmount(self.costToGen)
         else:
             self.addAmount(self.gainPerSecond)
-
