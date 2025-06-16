@@ -127,6 +127,10 @@ class button:
     def buttonClicked(self):
         #Functionality of the buttons
         if self.visible == True:
-            buttonFunction = self.buttonFunctionality[0]
-            buttonFunctionVars = self.buttonFunctionality[1:]
-            buttonFunctionality.buttonFunctionality[buttonFunction](buttonFunctionVars)
+            if len(self.buttonFunctionality) > 1:
+                buttonFunction = self.buttonFunctionality[0]
+                buttonFunctionVars = self.buttonFunctionality[1:]
+                buttonFunctionality.buttonFunctionality[buttonFunction](buttonFunctionVars)
+            else:
+                buttonFunction = self.buttonFunctionality[0]
+                buttonFunctionality.buttonFunctionality[buttonFunction]()

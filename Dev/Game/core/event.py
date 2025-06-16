@@ -1,5 +1,7 @@
 import pygame as pg, core.chars as chars, core.listVars as listVars
 
+quitGame = False
+
 def eventCheck(running):
     for event in pg.event.get():
         running = checkIfQuit(event, running)
@@ -8,7 +10,7 @@ def eventCheck(running):
     return running
 
 def checkIfQuit(event, running):
-    if event.type == pg.QUIT:
+    if event.type == pg.QUIT or quitGame == True:
         running = False
     return running
 

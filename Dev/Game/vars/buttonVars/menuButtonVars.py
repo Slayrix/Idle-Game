@@ -84,3 +84,13 @@ drawConditionsList = None
 updateTextList = None
 infobox = None
 changeResBack = buttonClass.button(textList, activeMenuList, (255, 255, 255), 235, 100, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)
+
+#quitButton
+textList = ["Quit Game"]
+activeMenuList = ["settings"]
+buttonGroup = None
+buttonFunctionality = ["quitGame"]
+drawConditionsList = None
+updateTextList = None
+infobox = None
+quitButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 320, 150, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList, infobox)

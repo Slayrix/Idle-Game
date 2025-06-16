@@ -1,4 +1,4 @@
-import core.menu as menu, core.listVars as listVars, core.settings as settings, core.game as game, pygame as pg, vars.textVars as textVars
+import core.menu as menu, core.listVars as listVars, core.settings as settings, core.game as game, pygame as pg, vars.textVars as textVars, core.event as event
 
 def genCurrency(functionVars):
     currencyVar = functionVars[0]
@@ -52,11 +52,15 @@ def setObjsToNewResolution():
     for object in listVars.objectList.list:
         if object[1] == "textBox":
             object[0].resizeTextBox()
+
+def quitGame():
+    event.quitGame = True
     
 buttonFunctionality = {
     "genCurrency": genCurrency,
     "changeMenu": changeMenu,
     "buyUpgrade": buyUpgrade,
     "cheat": cheat,
-    "changeResolution": changeResolution
+    "changeResolution": changeResolution,
+    "quitGame": quitGame
 }
