@@ -1,0 +1,11 @@
+Created: 4/11/25
+Archived: 6/17/25
+
+Added infoboxes for upgrades
+Put all upgrade info into infoboxes
+Reworked UI layout
+Added settings menu
+Added font and resolution settings
+Added in game way to change resolution
+Added quit button
+Added save and load buttons to settings
