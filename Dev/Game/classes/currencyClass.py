@@ -1,12 +1,24 @@
 import core.listVars as listVars
 
 class currency:
-    def __init__(self, currencyVarCostToGen = None):
+    def __init__(self, currencyVarCostToGen = None, uid = None):
         listVars.currencyList.list += [self]
         self.amount = 0
         self.gainPerSecond = 0
         self.costToGen = 0
         self.currencyVarCostToGen = currencyVarCostToGen
+    
+    def convertDataToDict(self):
+        return {
+            "amount": self.amount,
+            "gainPerSecond": self.gainPerSecond,
+            "costToGen": self.costToGen,
+        }
+    
+    def setData(self, currencyObjectData):
+        self.amount = currencyObjectData["amount"]
+        self.gainPerSecond = currencyObjectData["gainPerSecond"]
+        self.costToGen = currencyObjectData["costToGen"]
 
     def addOne(self):
         self.amount += 1

@@ -1,7 +1,8 @@
-import operations as op
+import operations as op, core.listVars as listVars
 
 class upgrade:
     def __init__(self, cost, currencyCost, growthRate = 0):
+        listVars.upgradeList.list += [self]
         self.cost = cost
         self.currencyCost = currencyCost
         self.level = 0
@@ -31,6 +32,20 @@ class genUpgrade(upgrade):
         self.functions = {
             "increaseGenPerSecondAmount": self.setIncreaseGenPerSecondAmount
         }
+
+    def convertDataToDict(self):
+        return {
+            "cost": self.cost,
+            "level": self.level,
+            "increaseGenPerSecondAmount": self.increaseGenPerSecondAmount,
+            "increaseCostPerGenAmount": self.increaseCostPerGenAmount
+        }
+    
+    def setData(self, upgradeObjectData):
+        self.cost = upgradeObjectData["cost"]
+        self.level = upgradeObjectData["level"]
+        self.increaseGenPerSecondAmount = upgradeObjectData["increaseGenPerSecondAmount"]
+        self.increaseCostPerGenAmount = upgradeObjectData["increaseCostPerGenAmount"]
     
     def setIncreaseGenPerSecondAmount(self, operation, amountIncrease):
         newAmount = op.ops[operation](self.increaseGenPerSecondAmount, amountIncrease)
@@ -53,6 +68,19 @@ class upgradeBuff(upgrade):
         self.upgradeVarBuffed = upgradeVarBuffed
         self.operation = operation
         self.amountIncrease = amountIncrease
+
+    def convertDataToDict(self):
+        return {
+            "cost": self.cost,
+            "level": self.level,
+            "amountIncrease": self.amountIncrease
+
+        }
+    
+    def setData(self, upgradeObjectData):
+        self.cost = upgradeObjectData["cost"]
+        self.level = upgradeObjectData["level"]
+        self.amountIncrease = upgradeObjectData["amountIncrease"]
     
     def buyUpgrade(self):
         if self.buyUpgradeCheck() == True:
