@@ -1,4 +1,4 @@
-import json, core.listVars as listVars, classes.currencyClass as currencyClass
+import json, core.listVars as listVars
 
 def saveData():
     saveDataList = []
