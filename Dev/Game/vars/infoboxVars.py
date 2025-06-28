@@ -15,3 +15,7 @@ matterGenUpgradeInfobox = infoboxClass.infobox(textList, (255, 255, 255), update
 textList = ["Double Energy Generation of Upgrade 1", "Cost: ", str(upgradeVars.genEnergyUpgradeBuff.cost) + " Matter"]
 updateTextList = None
 genEnergyUpgradeBuffInfobox = infoboxClass.infobox(textList, (255, 255, 255), updateTextList)
+
+textList = ["+1 Gas", "Cost: 9999"]
+updateTextList = None
+buyGasInfobox = infoboxClass.infobox(textList, (255, 255, 255), updateTextList)

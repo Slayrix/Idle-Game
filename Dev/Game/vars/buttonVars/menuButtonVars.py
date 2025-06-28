@@ -1,13 +1,4 @@
-import classes.buttonClass as buttonClass, vars.currencyVars as currencyVars, vars.upgradeVars as upgradeVars, vars.buttonGroupVars as buttonGroupVars
-
-#genButton
-textList = ["Click to gen"]
-activeMenuList = ["defaultMenu"]
-buttonGroup = None
-buttonFunctionality = ["genCurrency", currencyVars.energy, 1]
-drawConditionsList = None
-updateTextList = None
-genButton = buttonClass.button(textList, activeMenuList, (255, 255, 255), 320, 150, buttonGroup, buttonFunctionality, drawConditionsList, updateTextList)
+import classes.buttonClass as buttonClass, vars.upgradeVars as upgradeVars, vars.buttonGroupVars as buttonGroupVars
 
 #shopButton
 textList = ["Shop"]
